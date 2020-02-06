@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const UsersRouter = require('./routes/user')
+const UsersRouter = require('./routes/user');
+const MatchesRouter = require('./routes/match');
+const TicketsRouter = require('./routes/ticket');
 
 const app=express();
 app.use(express.json());
@@ -17,6 +19,8 @@ connection.once('open',()=>{
 })
 
 app.use('/user',UsersRouter);
+app.use('/match', MatchesRouter);
+app.use('/ticket', TicketsRouter);
 
 app.listen(port,()=>{
     console.log(`Server is running on port: ${port}`)
