@@ -37,7 +37,7 @@ class Sidebar extends React.Component {
                             </Link> 
                         </NavText>
                     </NavItem>
-                    <NavItem>
+                    <NavItem eventKey='sport'>
                         <NavIcon>
                         <i className="fa fa-futbol-o" style={{fontSize: '1.75em' }} ></i>
                         </NavIcon>
