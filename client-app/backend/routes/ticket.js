@@ -14,7 +14,7 @@ router.post('/',
         .sort().reverse()[0];
 
         var newTicket = new Ticket({
-            userId: req.body.userId,
+            code: req.body.code,
             date: req.body.date,
             matches : req.body.matches,
             payment: req.body.payment,

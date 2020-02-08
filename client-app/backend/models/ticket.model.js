@@ -2,19 +2,33 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const TicketSchema = new Schema({
-    userId: {
-        type: Schema.Types.ObjectId,
-        ref : 'User'
+    code: {
+        type: String,
+        required: true
     },
     date: {
         type : Date,
         required: true
     },
     matches: [
-        {
-            title: {
+        {   
+            matchId: {
+                type: Schema.Types.ObjectId,
+                required: true
+            },
+            team1: {
                 type: String,
                 required : true
+            },
+            team2: {
+                type: String,
+                required : true
+            },
+            team1score: {
+                type: Number
+            },
+            team2score: {
+                type: Number
             },
             date_of_match: {
                 type : Date,

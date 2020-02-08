@@ -10,7 +10,10 @@ let Match = require("../models/match.model");
 router.post('/',
     (req,res) => {
         var newMatch = new Match({
-            title: req.body.title,
+            team1: req.body.team1,
+            team2: req.body.team2,
+            team1score: req.body.team1score,
+            team2score: req.body.team2score,
             sport: req.body.sport,
             date_of_match : req.body.date_of_match,
             odds: req.body.odds
