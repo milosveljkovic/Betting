@@ -12,7 +12,7 @@ const TicketSchema = new Schema({
     },
     matches: [
         {   
-            matchId: {
+            match_id: {
                 type: Schema.Types.ObjectId,
                 required: true
             },
@@ -24,10 +24,10 @@ const TicketSchema = new Schema({
                 type: String,
                 required : true
             },
-            team1score: {
+            team1_score: {
                 type: Number
             },
-            team2score: {
+            team2_score: {
                 type: Number
             },
             date_of_match: {
@@ -41,9 +41,6 @@ const TicketSchema = new Schema({
                     },
                     final_score: {
                         type: String
-                    },
-                    included_odds: {
-                        type: Boolean
                     }
                 }
             ]

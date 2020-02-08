@@ -6,7 +6,7 @@ let User_ = require('../models/user.model');
 //@DESC     find user by _id
 router.route('/').get((req,res)=>{
     User_.findById(req.body._id)
-    .then(users=>res.json(users))
+    .then(user=>res.json(user))
     .catch(err=>res.status(400).json('User not found: Error'+err))
 })
 
@@ -53,5 +53,9 @@ router.route('/login').post((req,res)=>{
     })             
     .catch(err=>res.status(400).json(err))
 })
+
+function addTicketToMyTickets () {
+
+}
 
 module.exports=router;

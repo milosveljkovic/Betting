@@ -32,10 +32,10 @@ const UserSchema=new Schema({
     },
     my_tickets:[
         {
-            ticket_id :{type:String },
-            code:{type:String },
-            possible_profit:{ type: Schema.Types.Decimal128},
-            total_odd:{ type: Schema.Types.Decimal128}
+            ticket_id : {type : Schema.Types.ObjectId },
+            code : {type : String },
+            possible_profit : {type : Schema.Types.Decimal128},
+            total_odd : {type : Schema.Types.Decimal128}
         }
     ]
 })
