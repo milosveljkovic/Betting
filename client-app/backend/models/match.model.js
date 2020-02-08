@@ -7,7 +7,7 @@ const MatchSchema = new Schema({
             type: String,
             required : true
         },
-        teamId: {
+        team_id: {
             type: Schema.Types.ObjectId
         }
     },
@@ -16,14 +16,14 @@ const MatchSchema = new Schema({
             type: String,
             required : true
         },
-        teamId: {
+        team_id: {
             type: Schema.Types.ObjectId
         }
     },
-    team1score: {
+    team1_score: {
         type: Number
     },
-    team2score: {
+    team2_score: {
         type: Number
     },
     sport: {
@@ -33,6 +33,10 @@ const MatchSchema = new Schema({
     date_of_match: {
         type : Date,
         required: true
+    },
+    generated_score:{
+        type :Boolean,
+        default : false
     },
     odds: [
         {
