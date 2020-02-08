@@ -1,0 +1,22 @@
+.label{
+    color:black
+}
+
+.form-control{
+    width: 50%;
+}
+
+.title{
+    color:#db3d44;
+    margin-bottom: 25px;
+}
+
+.loginBtn{
+    background-color: #0096cc;
+    border:none;
+    border-radius: 3px;
+}
+
+.text-danger{
+    color:#db3d44;
+}

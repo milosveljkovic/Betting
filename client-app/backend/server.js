@@ -3,9 +3,12 @@ const mongoose = require('mongoose');
 const UsersRouter = require('./routes/user');
 const MatchesRouter = require('./routes/match');
 const TicketsRouter = require('./routes/ticket');
+var cors = require('cors');
 
 const app=express();
 app.use(express.json());
+
+app.use(cors());
 
 const port=5000;
 
