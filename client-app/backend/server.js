@@ -3,9 +3,16 @@ const mongoose = require('mongoose');
 const UsersRouter = require('./routes/user');
 const MatchesRouter = require('./routes/match');
 const TicketsRouter = require('./routes/ticket');
+<<<<<<< Updated upstream
+var cors = require('cors');
+=======
+const TeamRouter = require('./routes/team');
+>>>>>>> Stashed changes
 
 const app=express();
 app.use(express.json());
+
+app.use(cors());
 
 const port=5000;
 
@@ -21,6 +28,7 @@ connection.once('open',()=>{
 app.use('/user',UsersRouter);
 app.use('/match', MatchesRouter);
 app.use('/ticket', TicketsRouter);
+app.use('/team', TeamRouter);
 
 app.listen(port,()=>{
     console.log(`Server is running on port: ${port}`)

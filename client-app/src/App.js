@@ -6,9 +6,26 @@ import Sidebar from './components/sidebar/Sidebar'
 import Home from './pages/Home'
 import Navbar from './components/navbar/Navbar'
 
+import rootReducer from './store/reducers/root.reducer';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunkMiddleware from 'redux-thunk'
+import createSagaMiddleware from 'redux-saga';
+
 import routes from './routes'
 import history from './history';
 
+const sagaMiddleware = createSagaMiddleware();
+
+const middleWares = [sagaMiddleware, thunkMiddleware]
+
+export const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(...middleWares))
+);
+
+//sagaMiddleware.run(rootSaga);
 
 class App extends React.Component {
 
@@ -27,7 +44,7 @@ class App extends React.Component {
 
   render(){
   return (
-    //<Provider store={store}> 
+    <Provider store={store}> 
     <div>
       
       <Router history={history}>
@@ -45,7 +62,7 @@ class App extends React.Component {
         </div>
       </Router>
     </div>
-   // </Provider>
+   </Provider>
   );
   }
 }  
