@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 let User = require('../models/user.model');
 let Ticket = require("../models/ticket.model");
+let Match = require("../models/match.model");
 
 // @PATH    /ticket/add
 // @METHOD  POST
@@ -15,6 +16,7 @@ router.post('/add',(req,res) => {
 
         var newTicket = new Ticket({
             ...ticket,
+            possible_profit: ticket.total_odd * ticket.payment,
             check_date: latestDate
         });
         newTicket.save()
@@ -50,6 +52,63 @@ router.post('/',(req,res) => {
     .catch(err=>res.status(400).json('Ticket not found: Error'+err))
     }
 
+)
+
+// @PATH    /ticket/update
+// @METHOD  POST
+// @DESC    Checking if ticket is winning or not 
+router.post('/update',
+(req,res) => {
+        var winning_ticket = true;
+        Ticket.findById(req.body._id)
+        .then(ticket => {
+            ticket.matches.map((match) => {
+                Match.findById(match.match_id)
+                .then(
+                    match_info => {
+                        if(((match_info.team1_score <= match_info.team2_score) && match.odds[0].final_score=="1") || 
+                            ((match_info.team1_score != match_info.team2_score) && match.odds[0].final_score=="X") ||
+                            ((match_info.team1_score >= match_info.team2_score) && match.odds[0].final_score=="2"))
+                        {
+                            winning_ticket = false;
+                        }
+                    }
+                )
+            });
+        });
+        setTimeout(function() {
+            if(winning_ticket == true)
+            {
+                const update = {
+                    is_winning_ticket : true
+                }
+
+                Ticket.findByIdAndUpdate(req.body._id,update)
+                .then((ticket)=> res.json(ticket.is_winning_ticket))
+                .catch(err=>res.status(400).json(err))
+            }
+            else {
+                const update = {
+                    is_winning_ticket : false
+                }
+
+                Ticket.findByIdAndUpdate(req.body._id,update)
+                .then((ticket)=> res.json(ticket.is_winning_ticket))
+                .catch(err=>res.status(400).json(err))
+            }
+        },2000)
+    }
+)
+
+
+// @PATH    /ticket/top-tickets
+// @METHOD  GET
+// @DESC    Get best winning tickets
+router.get('/top-tickets',
+    (req,res) => {
+        Ticket.find({is_winning_ticket: true}).sort({possible_profit : -1})
+        .then(tickets => res.json(tickets));
+    }
 )
 
 module.exports = router;

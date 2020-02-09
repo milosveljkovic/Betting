@@ -58,4 +58,20 @@ function addTicketToMyTickets () {
 
 }
 
-module.exports=router;
+//@PATH     /user/update
+//@METHOD   POST
+//@DESC     add credit to profile
+router.post('/update',(req,res) => {
+    const newcredit = parseFloat(req.body.credit);
+
+    const options = {
+        new : true
+    }
+
+    User_.findOneAndUpdate({ email:req.body.email }, { $inc : {credit: newcredit} }, options)
+    .then((user_with_updated_credit =>res.json(user_with_updated_credit)))
+    .catch(err => res.status(400).json(err))
+}
+)
+
+module.exports = router;
