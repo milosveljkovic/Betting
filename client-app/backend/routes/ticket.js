@@ -32,10 +32,11 @@ router.post('/add',(req,res) => {
                 const options = {
                     new : true
                 } //return new object
-                const new_my_tickets={my_tickets:[...user.my_tickets,update]};
+                const new_my_tickets={$inc : {credit: -ticket.payment}, my_tickets:[...user.my_tickets,update]};
                 User.findOneAndUpdate({_id:user_id},new_my_tickets,options)
                 .then((updated_user)=> res.json(updated_user.my_tickets))
                 .catch(err=>res.status(400).json(err))
+                
             })
             .catch(err=>res.status(400).json(err))
         })
@@ -77,23 +78,32 @@ router.post('/update',
             });
         });
         setTimeout(function() {
+
+            const options = {
+                new : true
+            }
+
             if(winning_ticket == true)
             {
                 const update = {
                     is_winning_ticket : true
                 }
 
-                Ticket.findByIdAndUpdate(req.body._id,update)
-                .then((ticket)=> res.json(ticket.is_winning_ticket))
+                Ticket.findByIdAndUpdate(req.body._id,update,options)
+                .then((ticket)=> {
+                    User.findByIdAndUpdate({_id:req.body.user_id}, { $inc : {credit: ticket.possible_profit} }, options)
+                    .then(user => res.json({user: user, ticket: ticket})).catch(err => res.json(err));
+                })
                 .catch(err=>res.status(400).json(err))
-            }
+
+                }
             else {
                 const update = {
                     is_winning_ticket : false
                 }
 
-                Ticket.findByIdAndUpdate(req.body._id,update)
-                .then((ticket)=> res.json(ticket.is_winning_ticket))
+                Ticket.findByIdAndUpdate(req.body._id,update, options)
+                .then((ticket)=> res.json(ticket))
                 .catch(err=>res.status(400).json(err))
             }
         },2000)
