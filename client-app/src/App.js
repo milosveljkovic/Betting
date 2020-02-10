@@ -15,6 +15,7 @@ import createSagaMiddleware from 'redux-saga';
 
 import routes from './routes'
 import history from './history';
+import { thunk_action_getUserByIdAuth } from './store/actions/user.actions';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -43,6 +44,11 @@ class App extends React.Component {
 
 
   render(){
+
+    if(localStorage.getItem("user_id")){
+      store.dispatch(thunk_action_getUserByIdAuth(localStorage.getItem("user_id")))
+    }
+
   return (
     <Provider store={store}> 
     <div>

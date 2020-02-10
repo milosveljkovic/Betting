@@ -21,7 +21,7 @@ class Login extends Component {
     }
 
     checkEmail=(email)=>{
-        if(email.length<=6){
+        if(email.length<6){
             this.setState({"emailError":true})
             return false;
         }
@@ -30,7 +30,7 @@ class Login extends Component {
     }
 
     checkPassword=(password)=>{
-        if(password.length<=6){
+        if(password.length<6){
             this.setState({"passwordError":true})
             return false;
         }
@@ -40,12 +40,12 @@ class Login extends Component {
 
     onChange=(event)=>{
         this.setState({[event.target.name]:event.target.value})
-        if(this.state.email.length>=6){
+        if(this.state.email.length>6){
             this.setState({"emailCorrect":true})
         }else {
             this.setState({"emailCorrect":false})
         }
-        if(this.state.password.length>=6){
+        if(this.state.password.length>6){
             this.setState({"passwordCorrect":true})
         }else {
             this.setState({"passwordCorrect":false})
@@ -85,7 +85,7 @@ class Login extends Component {
                         <input  onChange={this.onChange} type="text" name="email" className="form-control " id="validationCustom01" placeholder="Email" value={email} required/>
                     {
                         emailError?
-                        <small  style={{"color":"red"}}>Email must contain at least 8 characters!</small>
+                        <small  style={{"color":"red"}}>Email must contain at least 6 characters!</small>
                         :
                         emailCorrect?
                         <small  style={{"color":"green"}}>Looks good!</small>
@@ -101,7 +101,7 @@ class Login extends Component {
                         value={password} name="password" required/>
                     {
                         passwordError?
-                        <small style={{"color":"red"}}>Password must contain at least 8 characters!</small>
+                        <small style={{"color":"red"}}>Password must contain at least 6 characters!</small>
                         :
                         passwordCorrect?
                         <small  style={{"color":"green"}}>Looks good!</small>
@@ -112,8 +112,8 @@ class Login extends Component {
                 </div>
             </form>
             {!this.props.loading && <button className="btn btn-primary loginBtn" onClick={this.handleSubmit}>Login</button>}
-            {this.props.loading && <div class="spinner-border text-danger" role="status">
-            <span class="sr-only">Loading...</span>
+            {this.props.loading && <div className="spinner-border text-danger" role="status">
+            <span className="sr-only">Loading...</span>
             </div>}
             <small className='ml-3 label'>Don't have an account? <Link to="/register">Register</Link></small>
             {

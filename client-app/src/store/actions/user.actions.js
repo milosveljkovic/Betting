@@ -1,9 +1,9 @@
-import {loginUserService} from '../services/service.user'
+import {loginUserService,getUserByUserIdService} from '../services/service.user'
 import {unsetLoading} from '../actions/loading-indicator.actions'
 
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_UNSUCCESS = "LOGIN_UNSUCCESS";
-
+export const GET_USER_SUCCESS_AUTH = 'GET_USER_SUCCESS_AUTH';
 
 export function loginSuccess(user){
     return {
@@ -30,6 +30,23 @@ export const thunk_action_loginWithEmailAndPass = credentials => {
                      dispatch(unsetLoading())
                      dispatch(loginUnsuccess())
                  }
+      })
+    }
+  }
+
+  export function getUserByIdAuth (user) {
+    return {
+        type:GET_USER_SUCCESS_AUTH,
+        user
+    }
+}
+
+  export const thunk_action_getUserByIdAuth = userID => {
+    return function(dispatch, getState) {
+      return getUserByUserIdService(userID).then(response=>{
+          if(response.status===200){
+              dispatch(getUserByIdAuth(response.data))
+          }
       })
     }
   }
