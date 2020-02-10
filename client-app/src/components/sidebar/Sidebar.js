@@ -46,14 +46,14 @@ class Sidebar extends React.Component {
                         </NavText>
                         <NavItem eventKey="football">
                             <NavText>
-                                <Link to="/football" style={{color:is_extended?'#fff':'#db3d44',textDecoration: 'none'}}>
+                                <Link to="/sport/football" style={{color:is_extended?'#fff':'#db3d44',textDecoration: 'none'}}>
                                     Football
                                 </Link> 
                             </NavText>
                         </NavItem>
                         <NavItem eventKey="basketball">
                             <NavText>
-                                <Link to="/basketball" style={{color:is_extended?'#fff':'#db3d44',textDecoration: 'none'}}>
+                                <Link to="/sport/basketball" style={{color:is_extended?'#fff':'#db3d44',textDecoration: 'none'}}>
                                     Basketball
                                 </Link> 
                             </NavText>

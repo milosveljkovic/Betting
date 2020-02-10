@@ -70,7 +70,7 @@ router.post('/update',(req,res) => {
 // @DESC    get all match with specific sport
 
 router.get('/',(req,res) => {
-    const sport_type=req.body.sport;
+    const sport_type=req.query.sport;
     Match.find({sport:sport_type})
     .then((matches=>res.json(matches)))
     .catch(err=>res.status(400).json(err))

@@ -2,12 +2,18 @@
 import Home from './pages/Home'
 import Login from './pages/Auth/Login'
 import Register from './pages/Auth/Register'
+import Matches from './pages/Matches'
 
 var routes= [
     {
         path: "/home",
         name: "Home",
         component: Home,
+    },
+    {
+        path: "/sport/:id",
+        name: "Matches",
+        component: Matches,
     },
     {
         path: "/login",

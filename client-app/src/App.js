@@ -57,13 +57,16 @@ class App extends React.Component {
         <Navbar/>
         <div className='content-div'>
           <Sidebar/>
-            <div id="wrapper" style={{'marginLeft':'64px'}}>
+            <div id="wrapper" style={{'marginLeft':'64px','display':'flex'}}>
           <Switch>
             <Route exact path="/" component={Home}/>
             {
               this.getRoutes(routes)
             }
           </Switch>
+            <div>
+              <h2 style={{'margin':'70px 30px','border':'solid','width':'400px','height':'600px'}}>ticket</h2>
+            </div>
             </div>
         </div>
       </Router>
