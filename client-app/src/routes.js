@@ -3,6 +3,7 @@ import Home from './pages/Home'
 import Login from './pages/Auth/Login'
 import Register from './pages/Auth/Register'
 import Matches from './pages/Matches'
+import Team from './pages/Team'
 
 var routes= [
     {
@@ -25,6 +26,11 @@ var routes= [
         name: "Register",
         component: Register,
     },
+    {
+        path: "/team/:id",
+        name: "Team",
+        component: Team,
+    }
 ]
 
 export default routes;

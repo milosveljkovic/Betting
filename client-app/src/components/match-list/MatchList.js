@@ -1,21 +1,17 @@
-//import '../../design/myDesign.css'
-
 import React from 'react';
 import './matchlist.css'
 import ButtonOdd from '../buttons/ButtonOdd'
-//import {Football} from '../../models/Football'
+import { Link } from 'react-router-dom';
+import { store } from '../../App';
+import { thunk_action_getTeam } from '../../store/actions/team.actions';
 
-//import ButtonOdd from '../buttons/ButtonOdd'
-
-// interface Props{
-//     match_list:Football[]
-// }
-
-// interface State{
-
-// }
 
 class List extends React.Component{
+
+    getTeam = (team_id) => {
+        store.dispatch(thunk_action_getTeam(team_id))
+    }
+
     render(){
         return(
             <div className="container "> 
@@ -41,12 +37,12 @@ class List extends React.Component{
                 this.props.match_list.map((match)=>{
                    return (
                     <div className="row rowstyle" key={match._id}>
-                        <div className="col">
-                        {match.team1.name}
-                        </div>
-                        <div className="col">
-                        {match.team2.name}
-                        </div>
+                        <Link to={`/team/${match.team1.team_id}`} style={{color: '#000000', textDecoration: 'none'}} className="col" onClick={() => this.getTeam(`${match.team1.team_id}`)}>
+                                {match.team1.name}
+                        </Link>
+                        <Link to={`/team/${match.team2.team_id}`} style={{color: '#000000', textDecoration: 'none'}} className="col" onClick={() => this.getTeam(`${match.team2.team_id}`)}>
+                            {match.team2.name}
+                        </Link>
                         <div className="col">
                             <ButtonOdd match={match} position={0} canAddOdd={localStorage.getItem("user_id")?false:true}/>
                         </div>

@@ -7,7 +7,7 @@ let Team = require("../models/team.model");
 //@METHOD   GET
 //@DESC     get team by id
 router.get("/", (req, res) => {
-     const teamId = req.body.team_id;
+     const teamId = req.query.team_id;
      Team.findOne({_id : teamId})
      .then((team => res.json(team)))
      .catch(err => res.status(400).json(err))
