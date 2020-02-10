@@ -4,7 +4,7 @@ let User_ = require('../models/user.model');
 //@PATH     /user
 //@METHOD   GET
 //@DESC     find user by _id
-router.route('/').get((req,res)=>{
+router.route('/').post((req,res)=>{
     User_.findById(req.body._id)
     .then(user=>res.json(user))
     .catch(err=>res.status(400).json('User not found: Error'+err))

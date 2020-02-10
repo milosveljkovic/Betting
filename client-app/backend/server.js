@@ -3,11 +3,8 @@ const mongoose = require('mongoose');
 const UsersRouter = require('./routes/user');
 const MatchesRouter = require('./routes/match');
 const TicketsRouter = require('./routes/ticket');
-<<<<<<< Updated upstream
 var cors = require('cors');
-=======
 const TeamRouter = require('./routes/team');
->>>>>>> Stashed changes
 
 const app=express();
 app.use(express.json());
