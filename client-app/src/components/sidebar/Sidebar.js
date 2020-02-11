@@ -69,8 +69,21 @@ class Sidebar extends React.Component {
                             </Link>
                         </NavIcon>
                         <NavText>
-                            <Link to={`/team/${user._id}`} style={{color: '#ffffff', textDecoration: 'none'}}>
+                            <Link to={`/user/${user._id}`} style={{color: '#ffffff', textDecoration: 'none'}}>
                                 Profile
+                            </Link> 
+                        </NavText>
+                    </NavItem>
+                    
+                    <NavItem eventKey="ticket" >
+                        <NavIcon >
+                            <Link to={`/current-ticket`} style={{color: '#ffffff', textDecoration: 'none'}}>
+                                <i className="fa fa-fw fa-list-ul" style={{ fontSize: '1.75em' }} />
+                            </Link>
+                        </NavIcon>
+                        <NavText>
+                            <Link to={`/current-ticket`} style={{color: '#ffffff', textDecoration: 'none'}}>
+                                Ticket
                             </Link> 
                         </NavText>
                     </NavItem>

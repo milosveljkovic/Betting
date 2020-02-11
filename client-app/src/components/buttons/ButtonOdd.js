@@ -1,7 +1,8 @@
 import React, { Dispatch } from 'react';
 import {Action } from 'redux';
 import {connect} from 'react-redux';
-
+import {addMatchToCurrentTicket,removeMatchFromCurrentTicket} from '../../store/actions/current-ticket.actions'
+import {changeMatchIncludedOddsFootball,changeMatchIncludedOddsBasketball} from '../../store/actions/match.actions'
 //import { Button } from 'react-bootstrap';
 //import {Football} from '../../models/Football';
 //import {TicketMatch} from '../../models/TicketMatch';
@@ -26,45 +27,53 @@ class ButtonOdd extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            buttonBackground:"#FFFFFF"
+            buttonBackground:"#C0C0C0"
         }
     }
 
-    // setTicketMatch=(match:Football)=>{
-    //     var ticketMatch:TicketMatch={
-    //         id:`${match.id}-${match.odds[this.props.position].finalscore}`,
-    //         title:match.title,
-    //         finalscore:match.odds[this.props.position].finalscore,
-    //         odd:match.odds[this.props.position].value
-    //     }
-    //     return ticketMatch;
-    // }
+    setTicketMatch=(match,position)=>{
+        var ticketMatch={
+            match_id:match._id,
+            team1:match.team1.name,
+            team2:match.team2.name,
+            date_of_match:match.date_of_match,
+            odds:[{
+                odd : match.odds[position].odd.$numberDecimal,
+                final_score : match.odds[position].final_score
+            }
+            ]
+        }
+        return ticketMatch;
+    }
 
-    // handleClick=()=>{
-    //     const {match,position} = this.props;
-    //     var matchVar=match;
-    //     if(!match.odds[position].includedodds){
-    //         matchVar.odds[position].includedodds=true;
+    handleClick=()=>{
+        const {match,position} = this.props;
+        var matchVar=match;
+        if(!match.odds[position].included_odds){
+            matchVar.odds[position].included_odds=true;
 
-    //         var ticketMatch:TicketMatch;
-    //         ticketMatch=this.setTicketMatch(match);
+            var ticketMatch;
+            ticketMatch=this.setTicketMatch(match,position);
+            this.props.addMatchToCurrentTicket(ticketMatch);
+            this.setState({buttonBackground:"#92D67D"});
 
-    //         this.props.addMatchToTicket(ticketMatch);
-    //         this.setState({buttonBackground:"#92D67D"});
-
-    //     }else{
-    //         matchVar.odds[position].includedodds=false;
-    //         this.props.removeMatchFromTicket(`${match.id}-${match.odds[position].finalscore}`)
-    //        this.setState({buttonBackground:"#FFFFFF"});
-    //     }
-    //     this.props.updateFootballMatch(matchVar);
-    // }
+        }else{
+            matchVar.odds[position].included_odds=false;
+            console.log(match._id);
+            this.props.removeMatchFromCurrentTicket(match._id)
+            this.setState({buttonBackground:"#C0C0C0"});
+        }
+        if(match.sport==='football'){
+            this.props.changeMatchIncludedOddsFootball(matchVar);
+        }else {
+            this.props.changeMatchIncludedOddsBasketball(matchVar);
+        }
+    }
 
     render(){
 
         const {buttonBackground}=this.state;
        const {position,match,canAddOdd}=this.props;
-        console.log(canAddOdd);
         return(
             <div>
             {
@@ -90,12 +99,13 @@ class ButtonOdd extends React.Component{
     }
 }
 
-// function mapDispatcherToProps(dispatch:Dispatch<Action>){
-//     return{
-//         // updateFootballMatch:(match:Football)=>dispatch(updateFootballMatch(match)),
-//         // addMatchToTicket:(ticketMatch:TicketMatch)=>dispatch(addMatchToTicket(ticketMatch)),
-//         // removeMatchFromTicket:(ticketMatchId:string)=>dispatch(removeMatchFromTicket(ticketMatchId))
-//     }
-// }
+function mapDispatcherToProps(dispatch){
+    return{
+        addMatchToCurrentTicket:(ticketMatch)=>dispatch(addMatchToCurrentTicket(ticketMatch)),
+        changeMatchIncludedOddsFootball:(match)=>dispatch(changeMatchIncludedOddsFootball(match)),
+        changeMatchIncludedOddsBasketball:(match)=>dispatch(changeMatchIncludedOddsBasketball(match)),
+        removeMatchFromCurrentTicket:(ticketMatchId)=>dispatch(removeMatchFromCurrentTicket(ticketMatchId))
+    }
+}
 
-export default connect(null,null)(ButtonOdd);
+export default connect(null,mapDispatcherToProps)(ButtonOdd);

@@ -1,4 +1,4 @@
-import {GET_BASKETBALL_MATCHES_SUCCESS,} from '../actions/match.actions';
+import {GET_BASKETBALL_MATCHES_SUCCESS,CHANGE_MATCH_INCLUDED_ODD_BASKETBALL} from '../actions/match.actions';
 
 const initialState=[{
     _id:'',
@@ -33,6 +33,14 @@ export function basketballReducer(state=initialState,action){
         case GET_BASKETBALL_MATCHES_SUCCESS:
             var basketball_matches =(action.basketball_matches)
             return basketball_matches   
+        case CHANGE_MATCH_INCLUDED_ODD_BASKETBALL:
+            var basketball_match=(action.basketball_match);
+            state.map(match=>{
+                if(match._id===basketball_match._id){
+                    match=basketball_match;
+                }
+            })
+            return [...state]
         default:
             return state;
     }

@@ -1,4 +1,4 @@
-import {GET_FOOTBALL_MATCHES_SUCCESS,} from '../actions/match.actions';
+import {GET_FOOTBALL_MATCHES_SUCCESS,CHANGE_MATCH_INCLUDED_ODD_FOOTBALL} from '../actions/match.actions';
 
 const initialState=[{
     _id:'',
@@ -33,6 +33,14 @@ export function footballReducer(state=initialState,action){
         case GET_FOOTBALL_MATCHES_SUCCESS:
             var football_matches =(action.football_matches)
             return football_matches   
+        case CHANGE_MATCH_INCLUDED_ODD_FOOTBALL:
+            var football_match=(action.football_match);
+            state.map(match=>{
+                if(match._id===football_match._id){
+                    match=football_match;
+                }
+            })
+            return [...state]
         default:
             return state;
     }

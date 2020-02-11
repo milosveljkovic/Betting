@@ -3,6 +3,8 @@ import {getMatchesBySportService} from '../services/service.match'
 
 export const GET_FOOTBALL_MATCHES_SUCCESS = 'GET_FOOTBALL_MATCHES_SUCCESS';
 export const GET_BASKETBALL_MATCHES_SUCCESS = 'GET_BASKETBALL_MATCHES_SUCCESS';
+export const CHANGE_MATCH_INCLUDED_ODD_FOOTBALL='CHANGE_MATCH_INCLUDED_ODD_FOOTBALL';
+export const CHANGE_MATCH_INCLUDED_ODD_BASKETBALL='CHANGE_MATCH_INCLUDED_ODD_BASKETBALL';
 
 export function getFootballMatchesSuccess(football_matches){
     return {
@@ -34,3 +36,18 @@ export const thunk_action_getMatches = sport => {
       })
     }
   }
+
+
+  export function changeMatchIncludedOddsFootball(football_match){
+    return {
+        type: CHANGE_MATCH_INCLUDED_ODD_FOOTBALL,
+        football_match
+    }
+}
+
+export function changeMatchIncludedOddsBasketball(basketball_match){
+    return {
+        type: CHANGE_MATCH_INCLUDED_ODD_BASKETBALL,
+        basketball_match
+    }
+}

@@ -6,12 +6,18 @@ import Matches from './pages/Matches'
 import Team from './pages/Team'
 import Profile from './pages/Profile'
 import Ticket from './pages/Ticket'
+import CurrentTicket from './pages/CurrentTicket'
 
 var routes= [
     {
         path: "/home",
         name: "Home",
         component: Home,
+    },
+    {
+        path:"/current-ticket",
+        name:"CurrentTicket",
+        component:CurrentTicket
     },
     {
         path: "/sport/:id",
