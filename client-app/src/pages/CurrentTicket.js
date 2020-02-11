@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
+import {thunk_action_playTicket} from '../store/actions/current-ticket.actions'
 import './CurrentTicket.css'
+import {setLoading} from '../store/actions/loading-indicator.actions'
 
 class CurrentTicket extends React.Component{
 
@@ -36,12 +38,41 @@ class CurrentTicket extends React.Component{
 
     }
 
+    playTicket=()=>{
+        const {current_ticket,current_user} = this.props;
+        const {code,payment,total_odd,possible_profit} = this.state;
+
+        var ticket ={
+            user_id:current_user._id,
+            ticket:{
+                code:code,
+                date:new Date(),
+                matches:current_ticket.matches,
+                payment:payment,
+                total_odd:total_odd
+            }
+        }
+        this.props.setLoading();
+        setTimeout(() => {
+            this.props.thunk_action_playTicket(ticket)
+        }, 1000);
+    }
+
+    canPlay=()=>{
+        const {current_ticket} = this.props;
+        const {payment} = this.state;
+        if(localStorage.getItem("user_id")){
+            if(current_ticket.matches.length>0 && payment>0){
+                return false
+            }
+        }
+        return true
+    }
+
     render(){ 
         const {code,payment,total_odd,possible_profit} = this.state;
         return(
             <div className="container">
-                {
-                    // ticket!==null?
                     <div>
                         <div className="row mt-4 px-3">              
                             <h5 className="col">
@@ -56,7 +87,7 @@ class CurrentTicket extends React.Component{
                             {
                                 this.props.current_ticket.matches.map(match => {
                                     return(
-                                        <div className="row my-3 px-3">
+                                        <div key={match.match_id} className="row my-3 px-3" >
                                             <div className="col-3">
                                                 <Moment format="DD-MMM HH:mm">{match.date_of_match}</Moment>
                                             </div>
@@ -65,7 +96,7 @@ class CurrentTicket extends React.Component{
                                             </div>
                                             <div className="col-2">
                                                 {match.odds.map(odd => {return (
-                                                    <div className="row">
+                                                    <div className="row" >
                                                         <div className="col">
                                                             {odd.final_score}
                                                         </div>
@@ -105,18 +136,35 @@ class CurrentTicket extends React.Component{
                             </h5>
                         </div>
                     </div>
-                }
+                    {!this.props.loading && 
+                    <button 
+                    disabled={this.canPlay()}
+                    onClick={this.playTicket} 
+                    className="btn btn-primary  my-2 my-lg-0 logoutBtn">
+                                Play
+                    </button>
+                    }
+                    {this.props.loading && <div className="spinner-border text-danger" role="status">
+                    <span className="sr-only">Loading...</span>
+                    </div>}
             </div>
         )
     }
 }
 
+function mapDispatcherToProps(dispatch){
+    return{
+        thunk_action_playTicket:(ticketMatch)=>dispatch(thunk_action_playTicket(ticketMatch)),
+        setLoading:()=>dispatch(setLoading())
+    }
+}
 
 function mapStateToProps(state){
     return{
         current_ticket:state.current_ticket,
-        current_user:state.current_user
+        current_user:state.current_user,
+        loading:state.loading_indicator
     }
 }
 
-export default connect(mapStateToProps,null)(CurrentTicket);
+export default connect(mapStateToProps,mapDispatcherToProps)(CurrentTicket);

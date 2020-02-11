@@ -4,6 +4,7 @@ import {unsetLoading} from '../actions/loading-indicator.actions'
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_UNSUCCESS = "LOGIN_UNSUCCESS";
 export const GET_USER_SUCCESS_AUTH = 'GET_USER_SUCCESS_AUTH';
+export const UPDATE_USER_TICKETS='UPDATE_USER_TICKETS';
 
 export function loginSuccess(user){
     return {
@@ -48,5 +49,12 @@ export const thunk_action_loginWithEmailAndPass = credentials => {
               dispatch(getUserByIdAuth(response.data))
           }
       })
+    }
+  }
+
+  export function updateUsersTickets (my_tickets) {
+    return {
+        type:UPDATE_USER_TICKETS,
+        my_tickets
     }
   }

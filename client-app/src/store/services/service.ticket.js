@@ -25,3 +25,15 @@ export function getTicketById(id){
         return errorMessage
     });
 }
+
+export function playTicketService(ticket){
+    var options = {
+        data: ticket
+    };
+    var config = generateRequest(POST, 'ticket/add' , options, {});
+    return axios(config)
+    .then( response => response)
+    .catch((errorMessage) => {
+        return errorMessage
+    });
+}

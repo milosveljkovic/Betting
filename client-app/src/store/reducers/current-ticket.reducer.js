@@ -1,4 +1,8 @@
-import { REMOVE_MATCH_FROM_CURRENTTICKET,ADD_MATCH_TO_CURRENTTICKET } from "../actions/current-ticket.actions";
+import { REMOVE_MATCH_FROM_CURRENTTICKET
+    ,ADD_MATCH_TO_CURRENTTICKET
+    ,PLAY_TICKET_SUCCESS,
+    PLAY_TICKET_UNSUCCESS
+} from "../actions/current-ticket.actions";
 
 const initialState = {
     code: '',
@@ -18,6 +22,14 @@ export function currentTicketReducer(state = initialState, action){
             var match_id=(action.match_id);
             state.matches=state.matches.filter(match=>match.match_id!==match_id);
             return {...state}
+        case PLAY_TICKET_SUCCESS:
+            return Object.assign({}, state, {
+                matches: []
+              })
+        case PLAY_TICKET_UNSUCCESS:
+            return Object.assign({}, state, {
+                matches: []
+              })
         default:
             return state;
     }

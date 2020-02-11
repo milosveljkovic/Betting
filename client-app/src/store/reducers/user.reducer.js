@@ -1,4 +1,4 @@
-import {LOGIN_SUCCESS, LOGIN_UNSUCCESS,GET_USER_SUCCESS_AUTH } from '../actions/user.actions';
+import {LOGIN_SUCCESS, LOGIN_UNSUCCESS,GET_USER_SUCCESS_AUTH ,UPDATE_USER_TICKETS} from '../actions/user.actions';
 
 const initialState={
     _id:'',
@@ -21,8 +21,11 @@ export function userReducer(state=initialState,action){
             return user
         case LOGIN_UNSUCCESS:
             return null
-        // case LOGOUT:
-        //     return {...initialState}    
+        case UPDATE_USER_TICKETS:
+            var my_tickets = (action.my_tickets);
+            return Object.assign({}, state, {
+                my_tickets: [...my_tickets]
+              })
         default:
             return state;
     }
