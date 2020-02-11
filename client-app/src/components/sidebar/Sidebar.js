@@ -4,6 +4,7 @@ import {Link } from 'react-router-dom'
 
 // Be sure to include styles at some point, probably during your bootstraping
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+import { connect } from 'react-redux';
 
 class Sidebar extends React.Component {
     constructor(props){
@@ -15,6 +16,7 @@ class Sidebar extends React.Component {
 
     render(){
         const {is_extended}=this.state;
+        const {user} = this.props;
         return (
             <SideNav
             onToggle={(expanded) => {
@@ -59,10 +61,28 @@ class Sidebar extends React.Component {
                             </NavText>
                         </NavItem>
                     </NavItem>
+
+                    <NavItem eventKey="profile">
+                        <NavIcon>
+                            <Link to={`/user/${user._id}`} style={{color: '#ffffff', textDecoration: 'none'}}>
+                                <i className="fa fa-fw fa-user" style={{ fontSize: '1.75em' }} />
+                            </Link>
+                        </NavIcon>
+                        <NavText>
+                            <Link to={`/team/${user._id}`} style={{color: '#ffffff', textDecoration: 'none'}}>
+                                Profile
+                            </Link> 
+                        </NavText>
+                    </NavItem>
                 </Nav>
             </SideNav>
         )
     }
 }
 
-export default Sidebar;
+function mapStateToProps(state){
+    return{
+        user:state.current_user
+    }
+}
+export default connect(mapStateToProps,null)(Sidebar);

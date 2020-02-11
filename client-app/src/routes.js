@@ -4,6 +4,8 @@ import Login from './pages/Auth/Login'
 import Register from './pages/Auth/Register'
 import Matches from './pages/Matches'
 import Team from './pages/Team'
+import Profile from './pages/Profile'
+import Ticket from './pages/Ticket'
 
 var routes= [
     {
@@ -30,6 +32,16 @@ var routes= [
         path: "/team/:id",
         name: "Team",
         component: Team,
+    },
+    {
+        path: "/user/:id",
+        name: "Profile",
+        component: Profile,
+    },
+    {
+        path: "/ticket/:id",
+        name: "Ticket",
+        component: Ticket,
     }
 ]
 

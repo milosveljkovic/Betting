@@ -4,6 +4,7 @@ import {loadingIndicatorReducer} from './loading-indicator.reducer'
 import {footballReducer} from './football.reducer'
 import {basketballReducer} from './basketball.reducer'
 import {teamReducer} from './team.reducer'
+import { ticketReducer } from "./ticket.reducer";
 
 
  const rootReducer = combineReducers({
@@ -11,7 +12,8 @@ import {teamReducer} from './team.reducer'
     loading_indicator:loadingIndicatorReducer,
     football_matches:footballReducer,
     basketball_matches:basketballReducer,
-    team: teamReducer
+    team: teamReducer,
+    ticket: ticketReducer
 })
 
 export default rootReducer;
