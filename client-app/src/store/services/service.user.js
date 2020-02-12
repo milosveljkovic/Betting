@@ -51,3 +51,18 @@ export function getUserByUserIdService (userId) {
         return errorMessage
     });
 }
+
+export function addUserCredit (email,credit) {
+    const info={ email:email, credit:credit };
+    var options = {
+        data: info
+    };
+    var config = generateRequest(POST, `user/update` ,options, {});
+    console.log(config)
+    return axios(config)
+    .then( response => response)
+    .catch((errorMessage) => {
+        return errorMessage
+    });
+}
+

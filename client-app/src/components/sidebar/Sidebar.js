@@ -87,6 +87,34 @@ class Sidebar extends React.Component {
                             </Link> 
                         </NavText>
                     </NavItem>
+                    <NavItem eventKey="topTickets" >
+                        <NavIcon >
+                            <Link to={`/top-tickets`} style={{color: '#ffffff', textDecoration: 'none'}}>
+                                <i className="fa fa-fw fa-trophy" style={{ fontSize: '1.75em' }} />
+                            </Link>
+                        </NavIcon>
+                        <NavText>
+                            <Link to={`/top-tickets`} style={{color: '#ffffff', textDecoration: 'none'}}>
+                                Ticket
+                            </Link> 
+                        </NavText>
+                    </NavItem>
+                    { user.is_admin?
+                    <NavItem eventKey="bank" className="mt-auto">
+                        <NavIcon >
+                            <Link to={`/bank`} style={{color: '#ffffff', textDecoration: 'none'}}>
+                                <i className="fa fa-fw fa-usd" style={{ fontSize: '1.75em' }} />
+                            </Link>
+                        </NavIcon>
+                        <NavText>
+                            <Link to={`/bank`} style={{color: '#ffffff', textDecoration: 'none'}}>
+                                Bank
+                            </Link> 
+                        </NavText>
+                    </NavItem>
+                    :
+                    null
+                    }
                 </Nav>
             </SideNav>
         )

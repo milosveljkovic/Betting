@@ -1,4 +1,4 @@
-import { URL ,POST } from '../constants'
+import { URL ,POST, GET } from '../constants'
 import axios from 'axios';
 
 export function generateRequest(method, url, options={}, headers={}) {
@@ -31,6 +31,16 @@ export function playTicketService(ticket){
         data: ticket
     };
     var config = generateRequest(POST, 'ticket/add' , options, {});
+    return axios(config)
+    .then( response => response)
+    .catch((errorMessage) => {
+        return errorMessage
+    });
+}
+
+export function getTopTicketsService(){
+
+    var config = generateRequest(GET, 'ticket/top-tickets' , {}, {});
     return axios(config)
     .then( response => response)
     .catch((errorMessage) => {

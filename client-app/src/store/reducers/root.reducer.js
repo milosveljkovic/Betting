@@ -6,6 +6,7 @@ import {basketballReducer} from './basketball.reducer'
 import {teamReducer} from './team.reducer'
 import { ticketReducer } from "./ticket.reducer";
 import {currentTicketReducer} from './current-ticket.reducer'
+import { topTicketsReducer } from "./top-tickets.reducer";
 
  const rootReducer = combineReducers({
     current_user:userReducer,
@@ -14,7 +15,8 @@ import {currentTicketReducer} from './current-ticket.reducer'
     basketball_matches:basketballReducer,
     team: teamReducer,
     ticket: ticketReducer,
-    current_ticket:currentTicketReducer
+    current_ticket:currentTicketReducer,
+    topTickets : topTicketsReducer
 })
 
 export default rootReducer;

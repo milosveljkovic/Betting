@@ -23,7 +23,7 @@ class Ticket extends React.Component{
                             {
                                 ticket.matches.map(match => {
                                     return(
-                                        <div className="row my-3 px-3">
+                                        <div className="row my-3 px-3" key={match._id}>
                                             <div className="col-3">
                                                 <Moment format="DD-MMM HH:mm">{match.date_of_match}</Moment>
                                             </div>
@@ -32,7 +32,7 @@ class Ticket extends React.Component{
                                             </div>
                                             <div className="col-2">
                                                 {match.odds.map(odd => {return (
-                                                    <div className="row">
+                                                    <div className="row" key={odd._id}>
                                                         <div className="col">
                                                             {odd.final_score}
                                                         </div>
@@ -49,10 +49,10 @@ class Ticket extends React.Component{
                         </div>
                         <div className="row mt-3 px-3">              
                             <h5 className="col">
-                                Total odd: {ticket.total_odd.$numberDecimal}
+                                Total odd: {parseFloat(ticket.total_odd.$numberDecimal).toFixed(2)}
                             </h5>
                             <h5 className="ml-auto pr-3">
-                                Possible profit : {ticket.possible_profit.$numberDecimal}
+                                Possible profit : {parseFloat(ticket.possible_profit.$numberDecimal).toFixed(2)}
                             </h5>
                         </div>
                         <div className="row mt-1 px-3">              

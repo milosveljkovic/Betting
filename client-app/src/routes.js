@@ -7,6 +7,8 @@ import Team from './pages/Team'
 import Profile from './pages/Profile'
 import Ticket from './pages/Ticket'
 import CurrentTicket from './pages/CurrentTicket'
+import Bank from './pages/Bank'
+import TopTickets from './pages/TopTickets'
 
 var routes= [
     {
@@ -48,6 +50,16 @@ var routes= [
         path: "/ticket/:id",
         name: "Ticket",
         component: Ticket,
+    },
+    {
+        path: "/bank",
+        name: "Bank",
+        component: Bank,
+    },
+    {
+        path: "/top-tickets",
+        name: "TopTickets",
+        component: TopTickets,
     }
 ]
 
