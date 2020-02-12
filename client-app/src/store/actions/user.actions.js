@@ -5,6 +5,7 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_UNSUCCESS = "LOGIN_UNSUCCESS";
 export const GET_USER_SUCCESS_AUTH = 'GET_USER_SUCCESS_AUTH';
 export const UPDATE_USER_TICKETS='UPDATE_USER_TICKETS';
+export const PAY_FOR_TICKET='PAY_FOR_TICKET';
 
 export function loginSuccess(user){
     return {
@@ -57,4 +58,11 @@ export const thunk_action_loginWithEmailAndPass = credentials => {
         type:UPDATE_USER_TICKETS,
         my_tickets
     }
+  }
+
+  export function payForTicket(payment){
+    return {
+      type:PAY_FOR_TICKET,
+      payment
+  }
   }

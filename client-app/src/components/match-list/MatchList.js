@@ -6,7 +6,7 @@ import { store } from '../../App';
 import { thunk_action_getTeam } from '../../store/actions/team.actions';
 
 
-class List extends React.Component{
+class List extends React.Component{ 
 
     getTeam = (team_id) => {
         store.dispatch(thunk_action_getTeam(team_id))
@@ -38,10 +38,10 @@ class List extends React.Component{
                    return (
                     <div className="row rowstyle" key={match._id}>
                         <Link to={`/team/${match.team1.team_id}`} style={{color: '#000000', textDecoration: 'none'}} className="col" onClick={() => this.getTeam(`${match.team1.team_id}`)}>
-                                {match.team1.name}
+                               <span className='teamName' > {match.team1.name} </span>
                         </Link>
                         <Link to={`/team/${match.team2.team_id}`} style={{color: '#000000', textDecoration: 'none'}} className="col" onClick={() => this.getTeam(`${match.team2.team_id}`)}>
-                            {match.team2.name}
+                                <span className='teamName' >{match.team2.name} </span>
                         </Link>
                         <div className="col">
                             <ButtonOdd match={match} position={0} canAddOdd={localStorage.getItem("user_id")?false:true}/>

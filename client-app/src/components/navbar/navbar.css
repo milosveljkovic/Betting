@@ -9,7 +9,18 @@
     border-radius: 3px;
 }
 
+.otherBtn{
+    background-color: #db3d44;
+    border:none;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+
 .betting{
     margin-bottom: 0rem;
     font-size: 29px;
+}
+
+.refreshIcon {
+    margin-left: 5px;
 }

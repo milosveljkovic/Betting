@@ -2,12 +2,25 @@ import React from 'react';
 import {Link } from 'react-router-dom'
 import './navbar.css'
 import {connect} from 'react-redux'
+import {setLoading,unsetLoading} from '../../store/actions/loading-indicator.actions'
 
 class Navbar extends React.Component {
 
     handleLogout=()=>{
         localStorage.clear();
         window.location.reload(true);
+      }
+
+      handleRefresh=()=>{
+          this.props.setLoading();
+          //@TO-DO: refresh , unsetloading when req is returned
+            setTimeout(() => {
+                this.props.unsetLoading();
+            }, 2000);
+      }
+
+      handleGenerate=()=>{
+            //@TO-DO: generate 
       }
 
     render(){
@@ -53,6 +66,25 @@ class Navbar extends React.Component {
                     :
                     null
                     }
+                    <button 
+                    disabled={this.props.loading}
+                    onClick={this.handleGenerate} 
+                    className="btn btn-primary  my-2 my-lg-0 otherBtn">
+                                Generate
+                                <i className='fa fa-upload refreshIcon'></i>
+                    </button>
+                    <button 
+                    disabled={this.props.loading}
+                    onClick={this.handleRefresh} 
+                    className="btn btn-primary  my-2 my-lg-0 otherBtn">
+                                Refresh
+                                {
+                                    this.props.loading===false?
+                                    <i className='fa fa-refresh refreshIcon faa-flash animated'></i>
+                                    :
+                                    <i className='fa fa-refresh refreshIcon fa-spin'></i>
+                                }
+                    </button>
                     {
                     localStorage.getItem("user_id")?
                     <div onClick={this.handleLogout} className="btn btn-primary  my-2 my-lg-0 logoutBtn">
@@ -69,9 +101,17 @@ class Navbar extends React.Component {
 
 function mapStateToProps(state){
     return {
-        current_user:state.current_user
+        current_user:state.current_user,
+        loading:state.loading_indicator
+    }
+  }
+
+  function mapDispatchToProps(dispatch){
+    return{
+        setLoading: () => (dispatch(setLoading())),
+        unsetLoading: () => (dispatch(unsetLoading()))
     }
   }
   
   
-  export default connect(mapStateToProps,null)(Navbar);
+  export default connect(mapStateToProps,mapDispatchToProps)(Navbar);

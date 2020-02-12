@@ -95,7 +95,7 @@ class Sidebar extends React.Component {
                         </NavIcon>
                         <NavText>
                             <Link to={`/top-tickets`} style={{color: '#ffffff', textDecoration: 'none'}}>
-                                Ticket
+                                Top 10 Tickets
                             </Link> 
                         </NavText>
                     </NavItem>

@@ -4,6 +4,7 @@ import Moment from 'react-moment';
 import {thunk_action_playTicket} from '../store/actions/current-ticket.actions'
 import './CurrentTicket.css'
 import {setLoading} from '../store/actions/loading-indicator.actions'
+import {payForTicket} from '../store/actions/user.actions'
 
 class CurrentTicket extends React.Component{
 
@@ -54,6 +55,7 @@ class CurrentTicket extends React.Component{
         }
         this.props.setLoading();
         setTimeout(() => {
+            this.props.payForTicket(payment);
             this.props.thunk_action_playTicket(ticket)
         }, 1000);
     }
@@ -155,7 +157,8 @@ class CurrentTicket extends React.Component{
 function mapDispatcherToProps(dispatch){
     return{
         thunk_action_playTicket:(ticketMatch)=>dispatch(thunk_action_playTicket(ticketMatch)),
-        setLoading:()=>dispatch(setLoading())
+        setLoading:()=>dispatch(setLoading()),
+        payForTicket:(payment)=>dispatch(payForTicket(payment))
     }
 }
 
