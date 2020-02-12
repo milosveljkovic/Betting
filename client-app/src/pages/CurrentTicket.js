@@ -34,7 +34,7 @@ class CurrentTicket extends React.Component{
         const new_payment=event.target.value
         this.setState({[event.target.name]:new_payment})
         var new_possible_proffit=new_payment*this.state.total_odd;
-        this.setState({possible_profit:new_possible_proffit})
+        this.setState({possible_profit:new_possible_proffit.toFixed(2)})
 
     }
 

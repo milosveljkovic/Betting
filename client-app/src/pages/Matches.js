@@ -22,9 +22,13 @@ class Matches extends React.Component{
 
     componentDidMount=()=>{
         const sport_type=this.props.match.params.id;
-        if(this.props.football_matches.length===1 || this.props.basketball_matches.length===1){
-        store.dispatch(thunk_action_getMatches(sport_type))
+        if(this.props.football_matches.length===1){
+        store.dispatch(thunk_action_getMatches('football'))
         this.setState({current_active_sport:sport_type})
+        }
+        if(this.props.basketball_matches.length===1){
+            store.dispatch(thunk_action_getMatches('basketball'))
+            this.setState({current_active_sport:sport_type})
         }
     }
 
