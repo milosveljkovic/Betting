@@ -47,7 +47,7 @@ router.post('/add',(req,res) => {
                         my_tickets:[...user.my_tickets,update],
                     };
                 }
-
+                //TODO: MOZDAA JE BOLJE DA SE VRACA CEO USER-OVDE
                 User.findOneAndUpdate({_id:user_id},new_my_tickets,options)
                 .then((updated_user)=> res.json(updated_user.my_tickets))
                 .catch(err=>res.status(400).json(err))

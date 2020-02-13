@@ -1,6 +1,8 @@
 const router = require('express').Router();
 let User_ = require('../models/user.model');
 
+const EXTRA_CREDIT=500;
+
 //@PATH     /user
 //@METHOD   GET
 //@DESC     find user by _id
@@ -70,6 +72,29 @@ router.post('/update',(req,res) => {
 
     User_.findOneAndUpdate({ email:req.body.email }, { $inc : {credit: newcredit} }, options)
     .then((user_with_updated_credit =>res.json(user_with_updated_credit)))
+    .catch(err => res.status(400).json(err))
+}
+)
+
+//@PATH     /update/extra-credit
+//@METHOD   POST
+//@DESC     add extra_credit to user
+//@REQ      req.body.email
+router.post('/update/extra-credit',(req,res) => {
+    const extra_credit = EXTRA_CREDIT ;
+
+    const options = {
+        new : true
+    }
+
+    User_.findOneAndUpdate(
+        { email:req.body.email },
+        { 
+            $inc : {credit: extra_credit} ,
+            has_extra_credit : false
+        }, 
+        options)
+    .then((user_with_extra_credit =>res.json(user_with_extra_credit)))
     .catch(err => res.status(400).json(err))
 }
 )
