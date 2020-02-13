@@ -5,6 +5,8 @@ import {thunk_action_playTicket} from '../store/actions/current-ticket.actions'
 import './CurrentTicket.css'
 import {setLoading} from '../store/actions/loading-indicator.actions'
 import {payForTicket} from '../store/actions/user.actions'
+import {store} from '../App'
+import {thunk_action_getMatches} from '../store/actions/match.actions'
 
 class CurrentTicket extends React.Component{
 
@@ -57,6 +59,8 @@ class CurrentTicket extends React.Component{
         setTimeout(() => {
             this.props.payForTicket(payment);
             this.props.thunk_action_playTicket(ticket)
+            store.dispatch(thunk_action_getMatches('football'))
+            store.dispatch(thunk_action_getMatches('basketball'))
         }, 1000);
     }
 
