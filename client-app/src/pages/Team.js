@@ -1,7 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import {YAxis,Tooltip,CartesianGrid,BarChart,XAxis,Bar,Legend} from 'recharts'
 class Team extends React.Component{
+
+    getData=()=>{
+        const {team} = this.props;
+        var data=[
+            {
+              "name": "Wins",
+              "wins": team.number_of_wins,
+            },
+            {
+              "name": "Draws",
+              "draw": team.number_of_draws,
+            },
+            {
+              "name": "Losses",
+              "lose": team.number_of_losses,
+            }
+          ]
+        return data;
+    }
 
     render(){ 
         const {team} = this.props;
@@ -9,7 +28,7 @@ class Team extends React.Component{
             <div className="container text-center">
                 {
                     team!==null?
-                    <div>
+                    <div style={{textAlight:'center'}}>
                         <img className="mt-4" style={{height:"300px",maxWidth:"100%"}}
                                 src={team.logo_url}
                                 alt="Team logo"></img>                    
@@ -40,6 +59,21 @@ class Team extends React.Component{
                                 </div>
                             </div>
                         </div>
+                        <BarChart 
+                        width={900} 
+                        height={300} 
+                        data={this.getData()}
+                        layout="vertical"
+                        >
+                            <XAxis type="number"/>
+                            <YAxis type="category" dataKey="name" />
+                            <CartesianGrid strokeDasharray="3 3"/>
+                            <Tooltip />
+                            <Legend />
+                            <Bar dataKey="wins" fill="#7DC242" />
+                            <Bar dataKey="draw" fill="#828282" />
+                            <Bar dataKey="lose" fill="#ff0048" />
+                        </BarChart>
                     </div>
                     :
                     'There is now info about team'
