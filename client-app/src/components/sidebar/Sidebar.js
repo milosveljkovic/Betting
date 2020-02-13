@@ -115,6 +115,22 @@ class Sidebar extends React.Component {
                     :
                     null
                     }
+                    { user.is_admin?
+                    <NavItem eventKey="statistics" className="mt-auto">
+                        <NavIcon >
+                            <Link to={`/statistics`} style={{color: '#ffffff', textDecoration: 'none'}}>
+                            <i class="fa fa-bar-chart" aria-hidden="true" style={{ fontSize: '1.75em' }}></i>
+                            </Link>
+                        </NavIcon>
+                        <NavText>
+                            <Link to={`/statistics`} style={{color: '#ffffff', textDecoration: 'none'}}>
+                                Statistics
+                            </Link> 
+                        </NavText>
+                    </NavItem>
+                    :
+                    null
+                    }
                 </Nav>
             </SideNav>
         )

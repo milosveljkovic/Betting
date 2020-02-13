@@ -136,4 +136,31 @@ router.get('/top-tickets',
     }
 )
 
+// @PATH    /ticket/statistics
+// @METHOD  GET
+// @DESC    Get ticket for statistic
+router.get('/statistics',(req,res) => {
+    Ticket.find({ is_winning_ticket:[true,false]})
+    .sort({ date:'asc' })
+    .then(tickets => {
+       var win_tickets=[],loss_ticket=[];
+       var i=0;
+       for( i ; i < tickets.length ; i++){
+           if(tickets[i].is_winning_ticket===true){
+                win_tickets.push(tickets[i])
+           }else {
+                loss_ticket.push(tickets[i])
+           }
+       }
+       var ticket_statistics={
+            win_tickets:win_tickets,
+            loss_ticket:loss_ticket
+       }
+       res.json(ticket_statistics)
+    })
+    .catch(err=>res.status(400).json('Ticket not found: Error'+err))
+    }
+
+)
+
 module.exports = router;

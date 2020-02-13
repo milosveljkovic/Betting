@@ -7,6 +7,7 @@ import {teamReducer} from './team.reducer'
 import { ticketReducer } from "./ticket.reducer";
 import {currentTicketReducer} from './current-ticket.reducer'
 import { topTicketsReducer } from "./top-tickets.reducer";
+import {statisticsReducer} from './statistics.reducer'
 
  const rootReducer = combineReducers({
     current_user:userReducer,
@@ -16,7 +17,8 @@ import { topTicketsReducer } from "./top-tickets.reducer";
     team: teamReducer,
     ticket: ticketReducer,
     current_ticket:currentTicketReducer,
-    topTickets : topTicketsReducer
+    topTickets : topTicketsReducer,
+    statistics: statisticsReducer
 })
 
 export default rootReducer;

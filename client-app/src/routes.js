@@ -9,6 +9,7 @@ import Ticket from './pages/Ticket'
 import CurrentTicket from './pages/CurrentTicket'
 import Bank from './pages/Bank'
 import TopTickets from './pages/TopTickets'
+import Statistics from './pages/Statistics/Statistics'
 
 var routes= [
     {
@@ -20,6 +21,11 @@ var routes= [
         path:"/current-ticket",
         name:"CurrentTicket",
         component:CurrentTicket
+    },
+    {
+        path:"/statistics",
+        name:"Statistics",
+        component:Statistics
     },
     {
         path: "/sport/:id",
