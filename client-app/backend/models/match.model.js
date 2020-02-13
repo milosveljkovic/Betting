@@ -28,7 +28,8 @@ const MatchSchema = new Schema({
     },
     sport: {
         type: String,
-        required: true
+        required: true,
+        index : true
     },
     date_of_match: {
         type : Date,
