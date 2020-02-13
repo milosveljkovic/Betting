@@ -16,7 +16,9 @@ class CurrentTicket extends React.Component{
             code:"",
             total_odd:0,
             payment:0,
-            possible_profit:0
+            possible_profit:0,
+            error:false,
+            paymentError:false
          }
     }
 
@@ -40,11 +42,31 @@ class CurrentTicket extends React.Component{
         this.setState({possible_profit:new_possible_proffit.toFixed(2)})
 
     }
+    isOk=()=>{
+        const {code,payment} = this.state;
+        const {current_user} = this.props;
+
+        if(code.length<6){
+            this.setState({error:true})
+            return false
+        }
+        this.setState({error:false})
+
+        if(payment>Number(current_user.credit.$numberDecimal))
+        {
+            this.setState({paymentError:true})
+            return false
+        }
+        this.setState({paymentError:false})
+
+        return true;
+    }
 
     playTicket=()=>{
         const {current_ticket,current_user} = this.props;
         const {code,payment,total_odd,possible_profit} = this.state;
 
+        if(this.isOk()){
         var ticket ={
             user_id:current_user._id,
             ticket:{
@@ -62,6 +84,8 @@ class CurrentTicket extends React.Component{
             store.dispatch(thunk_action_getMatches('football'))
             store.dispatch(thunk_action_getMatches('basketball'))
         }, 1000);
+    }
+    
     }
 
     canPlay=()=>{
@@ -85,6 +109,12 @@ class CurrentTicket extends React.Component{
                                 Code : 
                                 <input onChange={this.onChange} type="text" name="code" className="form-control inputStyle" id="validationCustom01" placeholder="ticket name" value={code} required/>
                             </h5>
+                            {
+                                this.state.error===true?
+                                <p style={{color:"red"}}>Code should be at least 6 characters</p>
+                                :
+                                <p/>
+                            }
                             <h5 className="ml-auto pr-3">
                                
                             </h5>
@@ -141,18 +171,26 @@ class CurrentTicket extends React.Component{
                                  required/>
                             </h5>
                         </div>
+                        {
+                            this.state.paymentError===true?
+                            <p style={{color:"red",marginLeft: "16px"}}>You don't have that money. Find real job.</p>
+                                :
+                            <p/>
+                        }
                     </div>
-                    {!this.props.loading && 
-                    <button 
-                    disabled={this.canPlay()}
-                    onClick={this.playTicket} 
-                    className="btn btn-primary  my-2 my-lg-0 logoutBtn">
-                                Play
-                    </button>
-                    }
-                    {this.props.loading && <div className="spinner-border text-danger" role="status">
-                    <span className="sr-only">Loading...</span>
-                    </div>}
+                    <div style={{textAlign:'center',marginTop:"20px"}}>
+                        {!this.props.loading && 
+                        <button 
+                        disabled={this.canPlay()}
+                        onClick={this.playTicket} 
+                        className="btn btn-primary  my-2 my-lg-0 logoutBtn">
+                                    Play
+                        </button>
+                        }
+                        {this.props.loading && <div className="spinner-border text-danger" role="status">
+                        <span className="sr-only">Loading...</span>
+                        </div>}
+                    </div>
             </div>
         )
     }
