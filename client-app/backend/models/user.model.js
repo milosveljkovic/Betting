@@ -37,7 +37,15 @@ const UserSchema=new Schema({
             possible_profit : {type : Schema.Types.Decimal128},
             total_odd : {type : Schema.Types.Decimal128}
         }
-    ]
+    ],
+    has_extra_credit:{
+        type : Boolean,
+        default : false
+    },
+    wasted_credit:{
+        type : Schema.Types.Decimal128,
+        default: 0.0
+    }
 })
 
 const User = mongoose_.model('User',UserSchema);

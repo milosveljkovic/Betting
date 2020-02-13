@@ -31,8 +31,23 @@ router.post('/add',(req,res) => {
             .then(user=>{
                 const options = {
                     new : true
-                } //return new object
-                const new_my_tickets={$inc : {credit: -ticket.payment}, my_tickets:[...user.my_tickets,update]};
+                } 
+                var old_wasted_credit=user.wasted_credit;
+                var new_my_tickets
+                if(old_wasted_credit > 10000){
+                       new_my_tickets={
+                        $inc : {credit: -ticket.payment},
+                        wasted_credit : 0,
+                        my_tickets:[...user.my_tickets,update],
+                        has_extra_credit:true
+                        };
+                } else {
+                        new_my_tickets={
+                        $inc : {credit: -ticket.payment, wasted_credit:ticket.payment},
+                        my_tickets:[...user.my_tickets,update],
+                    };
+                }
+
                 User.findOneAndUpdate({_id:user_id},new_my_tickets,options)
                 .then((updated_user)=> res.json(updated_user.my_tickets))
                 .catch(err=>res.status(400).json(err))
