@@ -1,4 +1,4 @@
-import { GET_TICKET_SUCCESS } from "../actions/ticket.actions";
+import { GET_TICKET_SUCCESS, UPDATE_TICKET } from "../actions/ticket.actions";
 
 const initialState = {
     _id: '',
@@ -16,6 +16,11 @@ export function ticketReducer(state = initialState, action){
         case GET_TICKET_SUCCESS:
             var ticket = (action.ticket);
             return ticket;
+        case UPDATE_TICKET:
+            var ticket = (action.ticket)
+            return Object.assign({}, state, {
+                is_winning_ticket: ticket.is_winning_ticket
+              })
         default:
             return state;
     }

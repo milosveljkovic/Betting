@@ -1,11 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
+import { thunk_action_updateIfIsWinning } from '../store/actions/ticket.actions';
+import { store } from '../App';
 
 class Ticket extends React.Component{
 
+    constructor(props){
+        super(props);
+        this.state={
+            winning_ticket: ''
+        }
+    }
+
+    handleCheck = (ticket_id, user_id) => {
+        store.dispatch(thunk_action_updateIfIsWinning(ticket_id,user_id));
+
+    }
+
     render(){ 
-        const {ticket} = this.props;
+        const {ticket, user} = this.props;
+        const user_tickets = Array.from(user.my_tickets.map(ticket => ticket.ticket_id));
         return(
             <div className="container">
                 {
@@ -19,7 +34,12 @@ class Ticket extends React.Component{
                                 Date : <Moment format="DD-MM-YYYY HH:mm">{ticket.date}</Moment>
                             </h5>
                         </div>
-                        <div className="card mt-2 px-4">
+                        <div className={ticket.is_winning_ticket===undefined?"card mt-2 px-4"
+                        :
+                        ticket.is_winning_ticket==true?
+                        "card border-success mt-2 px-4"
+                        :
+                        "card border-danger mt-2 px-4"}>
                             {
                                 ticket.matches.map(match => {
                                     return(
@@ -60,6 +80,23 @@ class Ticket extends React.Component{
                                 Payment: {ticket.payment.$numberDecimal}
                             </h5>
                         </div>
+                        
+                        { user_tickets.includes(ticket._id)?
+                            ticket.is_winning_ticket === undefined?
+                        <div>
+                            <button onClick={() => this.handleCheck(ticket._id, user._id)} className="btn btn-primary my-2 ml-3">
+                                Check ticket
+                            </button>
+                        </div>
+                        :
+                        <div>
+                            <button disabled className="btn btn-primary my-2 ml-3">
+                                Check ticket
+                            </button>
+                        </div>
+                        :
+                        null
+                        }
                     </div>
                     :
                     'There is now info about team'
@@ -72,7 +109,8 @@ class Ticket extends React.Component{
 
 function mapStateToProps(state){
     return{
-        ticket:state.ticket
+        ticket: state.ticket,
+        user: state.current_user
     }
 }
 

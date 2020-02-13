@@ -67,10 +67,10 @@ class Profile extends React.Component{
                                             </Link>
                                             </div>
                                             <div className="col">
-                                                {ticket.total_odd.$numberDecimal}
+                                                {parseFloat(ticket.total_odd.$numberDecimal).toFixed(2)}
                                             </div>
                                             <div className="col">
-                                                {ticket.possible_profit.$numberDecimal}
+                                                {parseFloat(ticket.possible_profit.$numberDecimal).toFixed(2)}
                                             </div>
                                             <hr/>
                                         </div>

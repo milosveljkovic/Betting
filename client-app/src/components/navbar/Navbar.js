@@ -33,19 +33,8 @@ class Navbar extends React.Component {
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <p className="betting">Betting
-                {
-                    this.props.current_user?
-                    this.props.current_user.credit.$numberDecimal!==undefined?
-                    <span style={{"fontSize":"15px","marginLeft":"10px"}}>
-                        Credit : {this.props.current_user.credit.$numberDecimal} rsd
-                    </span>
-                    :
-                    null
-                    :
-                    null
-                }
                 </p>
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button className="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
                 </button>
 
@@ -72,6 +61,7 @@ class Navbar extends React.Component {
                     :
                     null
                     }
+                    <div className="m-auto">
                     <button 
                     disabled={this.props.loading}
                     onClick={this.handleGenerate} 
@@ -91,6 +81,18 @@ class Navbar extends React.Component {
                                     <i className='fa fa-refresh refreshIcon fa-spin'></i>
                                 }
                     </button>
+                    </div>
+                    {
+                    this.props.current_user?
+                    this.props.current_user.credit.$numberDecimal!==undefined?
+                    <span style={{"fontSize":"15px","marginLeft":"10px"}} className="mr-4">
+                        Credit : <strong>{this.props.current_user.credit.$numberDecimal}</strong> rsd
+                    </span>
+                    :
+                    null
+                    :
+                    null
+                }
                     {
                     localStorage.getItem("user_id")?
                     <div onClick={this.handleLogout} className="btn btn-primary  my-2 my-lg-0 logoutBtn">

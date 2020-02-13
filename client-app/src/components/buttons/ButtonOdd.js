@@ -82,7 +82,7 @@ class ButtonOdd extends React.Component{
                 disabled={canAddOdd}
                 className="btn btn-primary oddBtn" 
                 onClick={this.handleClick} variant="outline-success"
-                style={{backgroundColor:buttonBackground}}>
+                style={{backgroundColor:buttonBackground , textDecoration:'none'}}>
                     {match.odds[position].odd.$numberDecimal}
                 </button>
                 :
@@ -90,7 +90,7 @@ class ButtonOdd extends React.Component{
                 disabled={canAddOdd}
                 className="btn btn-primary oddBtn" 
                 onClick={this.handleClick}variant="outline-success"
-                style={{backgroundColor:"#92D67D"}}>
+                style={{backgroundColor:"#92D67D", textDecoration:'none'}}>
                     {match.odds[position].odd.$numberDecimal}
                 </button>
             }

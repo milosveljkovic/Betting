@@ -1,4 +1,4 @@
-import {LOGIN_SUCCESS, LOGIN_UNSUCCESS,GET_USER_SUCCESS_AUTH ,UPDATE_USER_TICKETS,PAY_FOR_TICKET} from '../actions/user.actions';
+import {LOGIN_SUCCESS, LOGIN_UNSUCCESS,GET_USER_SUCCESS_AUTH ,UPDATE_USER_TICKETS,PAY_FOR_TICKET, UPDATE_USER_CREDIT} from '../actions/user.actions';
 
 const initialState={
     _id:'',
@@ -32,6 +32,9 @@ export function userReducer(state=initialState,action){
             var new_credit=cur_credit-payment
             state.credit.$numberDecimal=new_credit
             return state
+        case UPDATE_USER_CREDIT:
+            var user = (action.user);
+            return {...user}
         default:
             return state;
     }

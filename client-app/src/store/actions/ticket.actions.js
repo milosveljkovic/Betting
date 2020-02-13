@@ -1,8 +1,10 @@
 import { unsetLoading } from "./loading-indicator.actions";
-import { getTicketById } from "../services/service.ticket";
+import { getTicketById, checkTicket } from "../services/service.ticket";
+import { updateUserCredit } from "./user.actions";
 
 export const GET_TICKET = 'GET_TICKET';
 export const GET_TICKET_SUCCESS = 'GET_TICKET_SUCCESS';
+export const UPDATE_TICKET = 'UPDATE_TICKET';
 
 export function getTeam(id){
     return{
@@ -18,6 +20,13 @@ export function getTicketSuccess(ticket){
     }
 }
 
+export function updateTicket(ticket) {
+    return {
+        type: UPDATE_TICKET,
+        ticket
+    }
+  }
+
 export const thunk_action_getTicket = id => {
     return function(dispatch, getState) {
       return getTicketById(id)
@@ -28,6 +37,23 @@ export const thunk_action_getTicket = id => {
                 }else{
                     dispatch(unsetLoading())
                 }
+      })
+    }
+  }
+
+  export const thunk_action_updateIfIsWinning = (ticket_id, user_id) => {
+    return function(dispatch, getState) {
+      return checkTicket(ticket_id, user_id)
+            .then(response=>{
+                console.log(response.data)
+                if(response.status===200){
+                    dispatch(unsetLoading())
+                    dispatch(updateUserCredit(response.data.user))
+                    dispatch(updateTicket(response.data.ticket))
+                 }else {
+                     dispatch(unsetLoading())
+                     dispatch(updateTicket(response.data.ticket))
+                 }
       })
     }
   }

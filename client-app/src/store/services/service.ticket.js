@@ -47,3 +47,16 @@ export function getTopTicketsService(){
         return errorMessage
     });
 }
+
+export function checkTicket(ticket_id, user_id){
+    const info={ _id: ticket_id, user_id: user_id };
+    var options = {
+        data: info
+    };
+    var config = generateRequest(POST, 'ticket/update' , options, {});
+    return axios(config)
+    .then( response => response)
+    .catch((errorMessage) => {
+        return errorMessage
+    });
+}

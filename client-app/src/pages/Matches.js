@@ -52,7 +52,7 @@ class Matches extends React.Component{
 
         return(
             <div className="container listmatchContainer">
-                <h1 className='title'>{this.props.match.params.id}</h1>
+                <h1 className='title mt-4'>{(this.props.match.params.id).toUpperCase()}</h1>
                 {
                     this.props.match.params.id==='football'?
                         football_matches.length>1?
