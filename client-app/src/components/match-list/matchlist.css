@@ -32,3 +32,9 @@
     color: #0096cc;
     text-decoration: underline;
 }
+
+.spinnerStyle{
+    margin-top: 100px;
+    width: 4rem;
+    height: 4rem;
+}

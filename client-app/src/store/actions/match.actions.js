@@ -1,5 +1,9 @@
 import {unsetLoading} from '../actions/loading-indicator.actions'
-import {getMatchesBySportService} from '../services/service.match'
+import {
+    getMatchesBySportService,
+    generateMatchesResultService,
+    refreshMatchesService} 
+    from '../services/service.match'
 
 export const GET_FOOTBALL_MATCHES_SUCCESS = 'GET_FOOTBALL_MATCHES_SUCCESS';
 export const GET_BASKETBALL_MATCHES_SUCCESS = 'GET_BASKETBALL_MATCHES_SUCCESS';
@@ -51,3 +55,61 @@ export function changeMatchIncludedOddsBasketball(basketball_match){
         basketball_match
     }
 }
+
+export const thunk_action_generateMatchResults = () => {
+    return function(dispatch, getState) {
+      return generateMatchesResultService()
+            .then(response=>{
+                if(response.status===200)
+                {
+                    getMatchesBySportService('football').
+                    then(response => {
+                        if(response.status===200)
+                        {
+                            dispatch(getFootballMatchesSuccess(response.data))
+                            getMatchesBySportService('basketball').
+                            then(response => {
+                                if(response.status===200)
+                                {
+                                    dispatch(getBasketballMatchesSuccess(response.data))
+                                    dispatch(unsetLoading())
+                                }
+                            })
+                        }
+                    })
+                 }
+                 else{
+                    dispatch(unsetLoading())
+                 }
+      })
+    }
+  }
+
+  export const thunk_action_refreshMatches = () => {
+    return function(dispatch, getState) {
+      return refreshMatchesService()
+            .then(response=>{
+                if(response.status===200)
+                {
+                    getMatchesBySportService('football').
+                    then(response => {
+                        if(response.status===200)
+                        {
+                            dispatch(getFootballMatchesSuccess(response.data))
+                            getMatchesBySportService('basketball').
+                            then(response => {
+                                if(response.status===200)
+                                {
+                                    dispatch(getBasketballMatchesSuccess(response.data))
+                                    dispatch(unsetLoading())
+                                }
+                            })
+                        }
+                    })
+                 }
+                 else{
+                    dispatch(unsetLoading())
+                 }
+      })
+    }
+  }

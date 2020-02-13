@@ -22,3 +22,21 @@ export function getMatchesBySportService(sport){
         return errorMessage
     });
 }
+
+export function generateMatchesResultService(){
+    var config = generateRequest(GET, `match/update` , {}, {});
+    return axios(config)
+    .then( response => response)
+    .catch((errorMessage) => {
+        return errorMessage
+    });
+}
+
+export function refreshMatchesService (){
+    var config = generateRequest(GET, `match/refresh` , {}, {});
+    return axios(config)
+    .then( response => response)
+    .catch((errorMessage) => {
+        return errorMessage
+    });
+}

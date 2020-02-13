@@ -3,8 +3,9 @@ import './matchlist.css'
 import ButtonOdd from '../buttons/ButtonOdd'
 import { Link } from 'react-router-dom';
 import { store } from '../../App';
+import {connect} from 'react-redux'
 import { thunk_action_getTeam } from '../../store/actions/team.actions';
-
+import ShowResult from '../ShowResult/ShowResult'
 
 class List extends React.Component{ 
 
@@ -13,9 +14,13 @@ class List extends React.Component{
     }
 
     render(){
+        const {loading} = this.props;
         return(
             <div className="container "> 
+            {loading===false?
                 <div className="container matchtable">
+                    {
+                    this.props.match_list[0].generated_score===false?
                     <div className="row">
                         <div className="col">
                         Home
@@ -33,7 +38,27 @@ class List extends React.Component{
                         2
                         </div>
                     </div>
+                    :  //if result is generated
+                    <div className="row">
+                        <div className="col">
+                        Home
+                        </div>
+                        <div className="col">
+                        Away
+                        </div>
+                        <div className="col">
+                        
+                        </div>
+                        <div className="col">
+                        Result
+                        </div>
+                        <div className="col">
+                        
+                        </div>
+                    </div>
+                    }
                 {
+                this.props.match_list[0].generated_score===false?
                 this.props.match_list.map((match)=>{
                    return (
                     <div className="row rowstyle" key={match._id}>
@@ -55,11 +80,24 @@ class List extends React.Component{
                     </div>
                         )
                     })
+                    ://if result is generated
+                    <ShowResult matches={this.props.match_list} />
                 }  
                 </div>
+                :
+                <div className="spinner-border text-danger spinnerStyle" role="status">
+                    <span className="sr-only">Loading...</span>
+                </div>
+            }
             </div>
         )
     }
 }
 
-export default List;
+function mapStateToProps(state){
+    return {
+        loading:state.loading_indicator
+    }
+  }
+
+export default connect(mapStateToProps,null)(List);

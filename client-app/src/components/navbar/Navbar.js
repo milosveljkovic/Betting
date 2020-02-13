@@ -3,6 +3,7 @@ import {Link } from 'react-router-dom'
 import './navbar.css'
 import {connect} from 'react-redux'
 import {setLoading,unsetLoading} from '../../store/actions/loading-indicator.actions'
+import {thunk_action_generateMatchResults,thunk_action_refreshMatches} from '../../store/actions/match.actions'
 
 class Navbar extends React.Component {
 
@@ -12,15 +13,20 @@ class Navbar extends React.Component {
       }
 
       handleRefresh=()=>{
-          this.props.setLoading();
-          //@TO-DO: refresh , unsetloading when req is returned
-            setTimeout(() => {
-                this.props.unsetLoading();
-            }, 2000);
+        this.props.setLoading();
+
+        setTimeout(() => {
+            this.props.thunk_action_refreshMatches();
+        }, 1000);
       }
 
       handleGenerate=()=>{
             //@TO-DO: generate 
+            this.props.setLoading();
+
+            setTimeout(() => {
+                this.props.thunk_action_generateMatchResults();
+            }, 1000);
       }
 
     render(){
@@ -109,7 +115,9 @@ function mapStateToProps(state){
   function mapDispatchToProps(dispatch){
     return{
         setLoading: () => (dispatch(setLoading())),
-        unsetLoading: () => (dispatch(unsetLoading()))
+        unsetLoading: () => (dispatch(unsetLoading())),
+        thunk_action_generateMatchResults:()=>(dispatch(thunk_action_generateMatchResults())),
+        thunk_action_refreshMatches:()=>(dispatch(thunk_action_refreshMatches()))
     }
   }
   
