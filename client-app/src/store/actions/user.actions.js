@@ -1,4 +1,4 @@
-import {loginUserService,getUserByUserIdService} from '../services/service.user'
+import {loginUserService,getUserByUserIdService, addUserCreditFromBonus} from '../services/service.user'
 import {unsetLoading} from '../actions/loading-indicator.actions'
 
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
@@ -73,4 +73,15 @@ export const thunk_action_loginWithEmailAndPass = credentials => {
       type:PAY_FOR_TICKET,
       payment
   }
+  }
+
+  export const thunk_action_extraCredit = email => {
+    return function(dispatch, getState) {
+      return addUserCreditFromBonus(email)
+      .then(response=>{
+          if(response.status===200){
+              dispatch(updateUserCredit(response.data))
+          }
+      })
+    }
   }

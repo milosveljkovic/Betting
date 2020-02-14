@@ -23,7 +23,7 @@ export function getTicketSuccess(ticket){
 export function updateTicket(ticket) {
     return {
         type: UPDATE_TICKET,
-        ticket
+        ticket: ticket
     }
   }
 
@@ -45,11 +45,11 @@ export const thunk_action_getTicket = id => {
     return function(dispatch, getState) {
       return checkTicket(ticket_id, user_id)
             .then(response=>{
-                console.log(response.data)
+                console.log(response)
                 if(response.status===200){
                     dispatch(unsetLoading())
-                    dispatch(updateUserCredit(response.data.user))
                     dispatch(updateTicket(response.data.ticket))
+                    dispatch(updateUserCredit(response.data.user))
                  }else {
                      dispatch(unsetLoading())
                      dispatch(updateTicket(response.data.ticket))

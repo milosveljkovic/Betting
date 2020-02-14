@@ -41,26 +41,7 @@ class Navbar extends React.Component {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                 </ul>
-                    {
-                    !localStorage.getItem("user_id")?
-                    <li className="nav-link ">
-                        <Link to="/login" className='myLink'>
-                            Login
-                        </Link>
-                    </li>
-                    :
-                    null
-                    }
-                    {
-                    !localStorage.getItem("user_id")?
-                    <li className="nav-link">
-                        <Link to="/register" className='myLink'>
-                            Register
-                        </Link>
-                    </li>
-                    :
-                    null
-                    }
+                {this.props.current_user.email!==''?
                     <div className="m-auto">
                     <button 
                     disabled={this.props.loading}
@@ -82,11 +63,34 @@ class Navbar extends React.Component {
                                 }
                     </button>
                     </div>
+                    :null
+                    }
                     {
-                    this.props.current_user?
-                    this.props.current_user.credit.$numberDecimal!==undefined?
+                    !localStorage.getItem("user_id")?
+                    <li className="nav-link ">
+                        <Link to="/login" className='myLink'>
+                            Login
+                        </Link>
+                    </li>
+                    :
+                    null
+                    }
+                    {
+                    !localStorage.getItem("user_id")?
+                    <li className="nav-link">
+                        <Link to="/register" className='myLink'>
+                            Register
+                        </Link>
+                    </li>
+                    :
+                    null
+                    }
+                    
+                    {
+                    this.props.current_user.email!==''?
+                    this.props.current_user.credit!==undefined?
                     <span style={{"fontSize":"15px","marginLeft":"10px"}} className="mr-4">
-                        Credit : <strong>{this.props.current_user.credit.$numberDecimal}</strong> rsd
+                        Credit : <strong>{parseFloat(this.props.current_user.credit.$numberDecimal).toFixed(2)}</strong> rsd
                     </span>
                     :
                     null

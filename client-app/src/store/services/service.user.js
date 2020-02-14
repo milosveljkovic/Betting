@@ -58,7 +58,6 @@ export function addUserCredit (email,credit) {
         data: info
     };
     var config = generateRequest(POST, `user/update` ,options, {});
-    console.log(config)
     return axios(config)
     .then( response => response)
     .catch((errorMessage) => {
@@ -66,3 +65,15 @@ export function addUserCredit (email,credit) {
     });
 }
 
+export function addUserCreditFromBonus (email) {
+    const info={ email:email };
+    var options = {
+        data: info
+    };
+    var config = generateRequest(POST, `user/update/extra-credit` ,options, {});
+    return axios(config)
+    .then( response => response)
+    .catch((errorMessage) => {
+        return errorMessage
+    });
+}

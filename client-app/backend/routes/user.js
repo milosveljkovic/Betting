@@ -70,10 +70,22 @@ router.post('/update',(req,res) => {
         new : true
     }
 
-    User_.findOneAndUpdate({ email:req.body.email }, { $inc : {credit: newcredit} }, options)
-    .then((user_with_updated_credit =>res.json(user_with_updated_credit)))
-    .catch(err => res.status(400).json(err))
-}
+    var users;
+    User_.find({}).then( response => {
+        users = response.map(r=>r.email);
+        if(users.includes(req.body.email))
+        {
+            User_.findOneAndUpdate({ email:req.body.email }, { $inc : {credit: newcredit} }, options)
+            .then((user_with_updated_credit =>res.json(user_with_updated_credit)))
+            .catch(err => res.status(400).json(err))
+        }
+        else{
+            return res.status(400).send('There is no user with this email')
+        }
+    });
+
+    
+ }
 )
 
 //@PATH     /update/extra-credit

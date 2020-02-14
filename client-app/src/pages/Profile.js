@@ -3,11 +3,16 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { store } from '../App';
 import { thunk_action_getTicket } from '../store/actions/ticket.actions';
+import { thunk_action_extraCredit } from '../store/actions/user.actions';
 
 class Profile extends React.Component{
 
     getTicket = (ticket_id) => {
         store.dispatch(thunk_action_getTicket(ticket_id))
+    }
+
+    getBonus = (email) => {
+        store.dispatch(thunk_action_extraCredit(email));
     }
 
     render(){ 
@@ -45,6 +50,15 @@ class Profile extends React.Component{
                                 </div>
                             </div>
                         </div>
+                        { user.has_extra_credit == true?
+                        <div>
+                            <button onClick={() => this.getBonus(user.email)} className="btn btn-primary btn-lg my-2 mt-5">
+                                Collect bonus
+                            </button>
+                        </div>
+                        :
+                        null
+                        }
                         <div className="row mt-5">
                                 <div className="col">
                                     <div style={{fontSize:"20px", fontWeight:"bold"}}>Code</div>

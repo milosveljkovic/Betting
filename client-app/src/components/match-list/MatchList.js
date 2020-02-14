@@ -63,10 +63,10 @@ class List extends React.Component{
                    return (
                     <div className="row rowstyle" key={match._id}>
                         <Link to={`/team/${match.team1.team_id}`} className="col" onClick={() => this.getTeam(`${match.team1.team_id}`)}>
-                               <span className='teamName' style={{color: '#000000', textDecoration: 'none'}}> {match.team1.name} </span>
+                               <span style={{color: '#000000', textDecoration: 'none'}}> {match.team1.name} </span>
                         </Link>
                         <Link to={`/team/${match.team2.team_id}`} className="col" onClick={() => this.getTeam(`${match.team2.team_id}`)}>
-                                <span className='teamName' style={{color: '#000000', textDecoration: 'none'}}>{match.team2.name} </span>
+                                <span style={{color: '#000000', textDecoration: 'none'}}>{match.team2.name} </span>
                         </Link>
                         <div className="col">
                             <ButtonOdd match={match} position={0} canAddOdd={localStorage.getItem("user_id")?false:true}/>

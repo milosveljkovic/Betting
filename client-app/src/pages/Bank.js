@@ -82,7 +82,7 @@ class Bank extends React.Component{
                                 }
                             <h5 className="col mt-2">
                                 Credit : 
-                                <input onChange={this.onChange} type="text" name="credit" className="form-control inputStyle" placeholder="Please insert user email" value={credit} required/>
+                                <input onChange={this.onChange} type="number" name="credit" className="form-control inputStyle" placeholder="Please insert user email" value={credit} required/>
                             </h5>
                                 {
                                     creditError?

@@ -19,10 +19,10 @@ class ShowResult extends React.Component{
                    return (
                     <div className="row rowstyle" key={match._id}>
                         <Link to={`/team/${match.team1.team_id}`} style={{color: '#000000', textDecoration: 'none'}} className="col" onClick={() => this.getTeam(`${match.team1.team_id}`)}>
-                               <span className='teamName' > {match.team1.name} </span>
+                               <span > {match.team1.name} </span>
                         </Link>
                         <Link to={`/team/${match.team2.team_id}`} style={{color: '#000000', textDecoration: 'none'}} className="col" onClick={() => this.getTeam(`${match.team2.team_id}`)}>
-                                <span className='teamName' >{match.team2.name} </span>
+                                <span >{match.team2.name} </span>
                         </Link>
                         <div className="col">
                             

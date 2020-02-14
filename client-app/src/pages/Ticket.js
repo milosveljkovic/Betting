@@ -20,7 +20,7 @@ class Ticket extends React.Component{
 
     render(){ 
         const {ticket, user} = this.props;
-        const user_tickets = Array.from(user.my_tickets.map(ticket => ticket.ticket_id));
+        var user_tickets = user.my_tickets.map(ticket => ticket.ticket_id);
         return(
             <div className="container">
                 {
@@ -91,7 +91,7 @@ class Ticket extends React.Component{
                         :
                         <div>
                             <button disabled className="btn btn-primary my-2 ml-3">
-                                Check ticket
+                                Ticket checked
                             </button>
                         </div>
                         :

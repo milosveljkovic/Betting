@@ -118,7 +118,10 @@ router.post('/update',
                 }
 
                 Ticket.findByIdAndUpdate(req.body._id,update, options)
-                .then((ticket)=> res.json(ticket))
+                .then((ticket)=> {
+                    User.findById({_id:req.body.user_id},{}, options)
+                    .then(user => res.json({user: user, ticket: ticket})).catch(err => res.json(err));
+                })
                 .catch(err=>res.status(400).json(err))
             }
         },2000)

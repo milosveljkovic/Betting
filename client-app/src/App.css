@@ -39,5 +39,5 @@
 
 .content-div{
   position: relative;
-  height: calc(100vh - 50px);
+  height: 100vh;
 }

@@ -119,7 +119,7 @@ class Sidebar extends React.Component {
                     <NavItem eventKey="statistics" className="mt-auto">
                         <NavIcon >
                             <Link to={`/statistics`} style={{color: '#ffffff', textDecoration: 'none'}}>
-                            <i class="fa fa-bar-chart" aria-hidden="true" style={{ fontSize: '1.75em' }}></i>
+                            <i className="fa fa-bar-chart" aria-hidden="true" style={{ fontSize: '1.75em' }}></i>
                             </Link>
                         </NavIcon>
                         <NavText>

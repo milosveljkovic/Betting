@@ -18,9 +18,7 @@ export function ticketReducer(state = initialState, action){
             return ticket;
         case UPDATE_TICKET:
             var ticket = (action.ticket)
-            return Object.assign({}, state, {
-                is_winning_ticket: ticket.is_winning_ticket
-              })
+            return {...ticket}
         default:
             return state;
     }
