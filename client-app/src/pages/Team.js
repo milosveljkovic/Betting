@@ -32,30 +32,31 @@ class Team extends React.Component{
                         <img className="mt-4" style={{height:"300px",maxWidth:"100%"}}
                                 src={team.logo_url}
                                 alt="Team logo"></img>                    
-                        <h1 className="my-2">
+                        <h1 className="my-2 topTicketTitle">
                             {team.name}
                         </h1>
                         <div className="card mt-5 p-2">
                             <div className="row">
                                 <div className="col">
-                                    <div style={{fontSize:"24px"}}>Wins</div>
+                                    <div className='textStyle'>
+                                        Wins</div>
+                                    </div>
+                                <div className="col">
+                                    <div className='textStyle'>Draws</div>
                                 </div>
                                 <div className="col">
-                                    <div style={{fontSize:"24px"}}>Draws</div>
-                                </div>
-                                <div className="col">
-                                    <div style={{fontSize:"24px"}}>Losses</div>
+                                    <div className='textStyle'>Losses</div>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col">
-                                    <div style={{fontSize:"30px", fontWeight:"bold"}}>{team.number_of_wins}</div>
+                                    <div style={{fontSize:"30px", fontWeight:"300"}}>{team.number_of_wins}</div>
                                 </div>
                                 <div className="col">
-                                    <div style={{fontSize:"30px", fontWeight:"bold"}}>{team.number_of_draws}</div>
+                                    <div style={{fontSize:"30px", fontWeight:"300"}}>{team.number_of_draws}</div>
                                 </div>
                                 <div className="col">
-                                    <div style={{fontSize:"30px", fontWeight:"bold"}}>{team.number_of_losses}</div>
+                                    <div style={{fontSize:"30px", fontWeight:"300"}}>{team.number_of_losses}</div>
                                 </div>
                             </div>
                         </div>
