@@ -34,6 +34,7 @@ router.post('/add',(req,res) => {
                 } 
                 var old_wasted_credit=user.wasted_credit;
                 var new_my_tickets
+                console.log(old_wasted_credit);
                 if(old_wasted_credit > 10000){
                        new_my_tickets={
                         $inc : {credit: -ticket.payment},
@@ -47,9 +48,8 @@ router.post('/add',(req,res) => {
                         my_tickets:[...user.my_tickets,update],
                     };
                 }
-                //TODO: MOZDAA JE BOLJE DA SE VRACA CEO USER-OVDE
                 User.findOneAndUpdate({_id:user_id},new_my_tickets,options)
-                .then((updated_user)=> res.json(updated_user.my_tickets))
+                .then((updated_user)=> res.json(updated_user))
                 .catch(err=>res.status(400).json(err))
                 
             })

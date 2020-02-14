@@ -22,23 +22,23 @@ class TopTickets extends React.Component{
             <div className="container text-center">
                 {
                     topTickets!==null?
-                    <div>
+                    <div className='marginTopStyle'>
                                          
-                        <h1 className="my-2">
+                        <h1 className="my-2 topTicketTitle">
                             Top tickets
                         </h1>
                         <div className="row mt-5">
                                 <div className="col-2">
-                                    <div style={{fontSize:"20px", fontWeight:"bold"}}>#</div>
+                                    <div style={{fontSize:"20px", fontWeight:"300"}}>index#</div>
                                 </div>
                                 <div className="col">
-                                    <div style={{fontSize:"20px", fontWeight:"bold"}}>Code</div>
+                                    <div style={{fontSize:"20px", fontWeight:"300"}}>Code</div>
                                 </div>
                                 <div className="col">
-                                    <div style={{fontSize:"20px", fontWeight:"bold"}}>Total odd</div>
+                                    <div style={{fontSize:"20px", fontWeight:"300"}}>Total odd</div>
                                 </div>
                                 <div className="col">
-                                    <div style={{fontSize:"20px", fontWeight:"bold"}}>Possible profit</div>
+                                    <div style={{fontSize:"20px", fontWeight:"300"}}>Possible profit</div>
                                 </div>
                             </div>
                         <div className="card p-2 mt-2">
@@ -68,7 +68,7 @@ class TopTickets extends React.Component{
                         </div>
                     </div>
                     :
-                    'There is now info about team'
+                    'There is now info about top tickets'
                 }
             </div>
         )

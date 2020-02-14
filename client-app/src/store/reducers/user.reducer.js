@@ -20,12 +20,10 @@ export function userReducer(state=initialState,action){
             var user =(action.user)
             return user
         case LOGIN_UNSUCCESS:
-            return null
+            return state
         case UPDATE_USER_TICKETS:
-            var my_tickets = (action.my_tickets);
-            return Object.assign({}, state, {
-                my_tickets: [...my_tickets]
-              })
+            var updated_user = (action.updated_user);
+            return {...updated_user}
         case PAY_FOR_TICKET:
             var payment = (action.payment);
             var cur_credit=state.credit.$numberDecimal

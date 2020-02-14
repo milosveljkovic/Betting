@@ -4,6 +4,7 @@ import {YAxis,Tooltip,CartesianGrid,LineChart,XAxis,Bar,Legend,Line,ResponsiveCo
 import {store} from '../../App'
 import {thunk_action_getDataForStatistics} from '../../store/actions/statistics.actions'
 import './statistics.css'
+import {Redirect} from 'react-router-dom'
 
 var moment = require('moment');
 
@@ -29,7 +30,7 @@ class Statistics extends React.Component{
         for(i;i<statistics.win_tickets.length;i++){
             new_data.push({
                 "name":statistics.win_tickets[i].date,
-                "ourloss":statistics.win_tickets[i].possible_profit.$numberDecimal,
+                "loss":statistics.win_tickets[i].possible_profit.$numberDecimal,
             })
         }
 
@@ -82,12 +83,34 @@ class Statistics extends React.Component{
         return biggest_profit;
     }
 
+    getMaxForProfit=()=>{
+        const {statistics} = this.props;
+        var i=0;
+        var biggest_profit=0;
+        for(i;i<statistics.loss_ticket.length;i++){
+            if(biggest_profit<Number(statistics.loss_ticket[i].payment.$numberDecimal)){
+                biggest_profit=Number(statistics.loss_ticket[i].payment.$numberDecimal);
+            }
+        }
+        return biggest_profit;
+    }
+
     render(){ 
+
+        if(!localStorage.getItem("user_id")){
+            if(this.props.user!==undefined && 
+                (this.props.user.is_admin===null || this.props.user.is_admin===false)
+            ){
+                return <Redirect to="/home" />
+            }
+            
+        }
+
         return(
-            <div className="container text-center">
-                <h1>Statistics</h1>
+            <div className="container text-center topMarg">
+                <h1 className='statisticsStyle'>Statistics</h1>
                 <div style={{marginTop:'30px'}}>
-                    <p>How much credit we loose</p>
+                    <p className='descriptionStyle'>How much credit we loose</p>
                     <LineChart 
                     width={1000} 
                     height={300} 
@@ -100,13 +123,13 @@ class Statistics extends React.Component{
                     <YAxis type='number' domain={[0, this.getMax()]}/>
                     <Tooltip cursor={{ stroke: 'red', strokeWidth: 2 }} />
                     <Legend />
-                    <Line type="linear" dataKey="ourloss" stroke="red" dot={{ stroke: 'black', strokeWidth: 5 }}/>
+                    <Line type="linear" dataKey="loss" stroke="red" dot={{ stroke: 'black', strokeWidth: 5 }}/>
                     </LineChart>
-                    <p className='paragPtofit' >we loose - {this.getTotatlProfit()} rsd</p>
+                    <p className='paragPtofit' > loss - {this.getTotatlProfit()} rsd</p>
                 </div>
 
                 <div style={{marginTop:'30px'}}>
-                    <p>How much credit we earn</p>
+                    <p className='descriptionStyle'>How much credit we earn</p>
                     <LineChart 
                     width={1000} 
                     height={300} 
@@ -116,12 +139,12 @@ class Statistics extends React.Component{
                     dataKey="name" 
                     tickFormatter={timeStr => moment(timeStr).format('MMM Do YY')}
                     />
-                    <YAxis type='number' domain={[0, this.getMax()]}/>
+                    <YAxis type='number' domain={[0, this.getMaxForProfit()]}/>
                     <Tooltip cursor={{ stroke: 'green', strokeWidth: 2 }} />
                     <Legend />
                     <Line type="linear" dataKey="profit" stroke="green" dot={{ stroke: 'black', strokeWidth: 5 }}/>
                     </LineChart>
-                    <p className='paragPtofit' >our profit - {this.getOutProfit()} rsd</p>
+                    <p className='paragPtofit' >profit - {this.getOutProfit()} rsd</p>
                 </div>
             </div>
         )
@@ -131,7 +154,8 @@ class Statistics extends React.Component{
 
 function mapStateToProps(state){
     return{
-        statistics : state.statistics
+        statistics : state.statistics,
+        user:state.current_user
     }
 }
 

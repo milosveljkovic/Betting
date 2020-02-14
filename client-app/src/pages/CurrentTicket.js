@@ -105,10 +105,10 @@ class CurrentTicket extends React.Component{
             <div className="container">
                     <div>
                         <div className="row mt-4 px-3">              
-                            <h5 className="col">
+                            <h5 className="col textStyle">
                                 Code : 
                                 <input onChange={this.onChange} type="text" name="code" className="form-control inputStyle" id="validationCustom01" placeholder="ticket name" value={code} required/>
-                            </h5>
+                            </h5 >
                             {
                                 this.state.error===true?
                                 <p style={{color:"red"}}>Code should be at least 6 characters</p>
@@ -148,15 +148,15 @@ class CurrentTicket extends React.Component{
                             }
                         </div>
                         <div className="row mt-3 px-3">              
-                            <h5 className="col">
+                            <h5 className="col textStyle">
                                 Total odd: {total_odd}
                             </h5>
-                            <h5 className="ml-auto pr-3">
+                            <h5 className="ml-auto pr-3 textStyle">
                                 Possible profit : {possible_profit}
                             </h5>
                         </div>
                         <div className="row mt-1 px-3">              
-                            <h5 className="col">
+                            <h5 className="col textStyle">
                                 Payment: 
                                 <input 
                                 onChange={this.onChangePayment} 

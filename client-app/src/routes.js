@@ -66,6 +66,11 @@ var routes= [
         path: "/top-tickets",
         name: "TopTickets",
         component: TopTickets,
+    },
+    {
+        path: "*",
+        name: "Home",
+        component: Home,
     }
 ]
 

@@ -27,10 +27,10 @@ class Ticket extends React.Component{
                     ticket!==null?
                     <div>
                         <div className="row mt-4 px-3">              
-                            <h5 className="col">
+                            <h5 className="col textStyle">
                                 Code : {ticket.code}
                             </h5>
-                            <h5 className="ml-auto pr-3">
+                            <h5 className="ml-auto pr-3 textStyle">
                                 Date : <Moment format="DD-MM-YYYY HH:mm">{ticket.date}</Moment>
                             </h5>
                         </div>
@@ -68,15 +68,15 @@ class Ticket extends React.Component{
                             }
                         </div>
                         <div className="row mt-3 px-3">              
-                            <h5 className="col">
+                            <h5 className="col textStyle">
                                 Total odd: {parseFloat(ticket.total_odd.$numberDecimal).toFixed(2)}
                             </h5>
-                            <h5 className="ml-auto pr-3">
+                            <h5 className="ml-auto pr-3 textStyle">
                                 Possible profit : {parseFloat(ticket.possible_profit.$numberDecimal).toFixed(2)}
                             </h5>
                         </div>
-                        <div className="row mt-1 px-3">              
-                            <h5 className="col">
+                        <div className="row mt-1 px-3 ">              
+                            <h5 className="col textStyle">
                                 Payment: {ticket.payment.$numberDecimal}
                             </h5>
                         </div>
@@ -84,7 +84,9 @@ class Ticket extends React.Component{
                         { user_tickets.includes(ticket._id)?
                             ticket.is_winning_ticket === undefined?
                         <div>
-                            <button onClick={() => this.handleCheck(ticket._id, user._id)} className="btn btn-primary my-2 ml-3">
+                            <button 
+                            onClick={() => this.handleCheck(ticket._id, user._id)} 
+                            className="btn btn-primary my-2 ml-3 checkTicket">
                                 Check ticket
                             </button>
                         </div>

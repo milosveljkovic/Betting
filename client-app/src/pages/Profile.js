@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { store } from '../App';
 import { thunk_action_getTicket } from '../store/actions/ticket.actions';
 import { thunk_action_extraCredit } from '../store/actions/user.actions';
+import './CurrentTicket.css'
 
 class Profile extends React.Component{
 
@@ -40,19 +41,24 @@ class Profile extends React.Component{
                             </div>
                             <div className="row">
                                 <div className="col">
-                                    <div style={{fontSize:"24px", fontWeight:"bold"}}>{user.age}</div>
+                                    <div style={{fontSize:"20px", fontWeight:"300"}}>{user.age}</div>
                                 </div>
                                 <div className="col">
-                                    <div style={{fontSize:"24px", fontWeight:"bold"}}>{user.email}</div>
+                                    <div style={{fontSize:"20px", fontWeight:"300"}}>{user.email}</div>
                                 </div>
                                 <div className="col">
-                                    <div style={{fontSize:"24px", fontWeight:"bold"}}>{user.credit.$numberDecimal}</div>
+                                    <div style={{fontSize:"20px", fontWeight:"300"}}>{user.credit.$numberDecimal}</div>
                                 </div>
                             </div>
                         </div>
                         { user.has_extra_credit == true?
-                        <div>
-                            <button onClick={() => this.getBonus(user.email)} className="btn btn-primary btn-lg my-2 mt-5">
+                        <div style={{margin:"40px"}}>
+                            <p style={{marginBottom: "1px"}}>
+                                We decide to reward you. Collect your 500 credits!
+                            </p>
+                            <button 
+                            onClick={() => this.getBonus(user.email)} 
+                            className="btn btn-primary  collectBonusBtn">
                                 Collect bonus
                             </button>
                         </div>
@@ -61,13 +67,13 @@ class Profile extends React.Component{
                         }
                         <div className="row mt-5">
                                 <div className="col">
-                                    <div style={{fontSize:"20px", fontWeight:"bold"}}>Code</div>
+                                    <div style={{fontSize:"20px", fontWeight:"300"}}>Code</div>
                                 </div>
                                 <div className="col">
-                                    <div style={{fontSize:"20px", fontWeight:"bold"}}>Total odd</div>
+                                    <div style={{fontSize:"20px", fontWeight:"300"}}>Total odd</div>
                                 </div>
                                 <div className="col">
-                                    <div style={{fontSize:"20px", fontWeight:"bold"}}>Possible profit</div>
+                                    <div style={{fontSize:"20px", fontWeight:"300"}}>Possible profit</div>
                                 </div>
                             </div>
                         <div className="card p-2 mt-2">
@@ -76,8 +82,12 @@ class Profile extends React.Component{
                                     return(
                                         <div key={ticket._id} className="row">
                                             <div className="col">
-                                            <Link to={`/ticket/${ticket.ticket_id}`} style={{color: '#000000', textDecoration: 'none'}} className="col" onClick={() => this.getTicket(`${ticket.ticket_id}`)}>
-                                                {ticket.code}
+                                            <Link to={`/ticket/${ticket.ticket_id}`} 
+                                            style={{color: '#000000', textDecoration: 'none'}} 
+                                            className="col" onClick={() => this.getTicket(`${ticket.ticket_id}`)}>
+                                               <span style={{textDecoration: 'underline'}}> 
+                                                   {ticket.code}
+                                               </span>
                                             </Link>
                                             </div>
                                             <div className="col">

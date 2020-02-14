@@ -61,7 +61,8 @@ class Sidebar extends React.Component {
                             </NavText>
                         </NavItem>
                     </NavItem>
-
+                    {
+                        user?
                     <NavItem eventKey="profile">
                         <NavIcon>
                             <Link to={`/user/${user._id}`} style={{color: '#ffffff', textDecoration: 'none'}}>
@@ -74,6 +75,9 @@ class Sidebar extends React.Component {
                             </Link> 
                         </NavText>
                     </NavItem>
+                    :
+                    null
+                    }
                     
                     <NavItem eventKey="ticket" >
                         <NavIcon >
@@ -99,7 +103,9 @@ class Sidebar extends React.Component {
                             </Link> 
                         </NavText>
                     </NavItem>
-                    { user.is_admin?
+                    { 
+                    user?
+                    user.is_admin?
                     <NavItem eventKey="bank" className="mt-auto">
                         <NavIcon >
                             <Link to={`/bank`} style={{color: '#ffffff', textDecoration: 'none'}}>
@@ -114,8 +120,12 @@ class Sidebar extends React.Component {
                     </NavItem>
                     :
                     null
+                    :
+                    null
                     }
-                    { user.is_admin?
+                    { 
+                    user?
+                    user.is_admin?
                     <NavItem eventKey="statistics" className="mt-auto">
                         <NavIcon >
                             <Link to={`/statistics`} style={{color: '#ffffff', textDecoration: 'none'}}>
@@ -128,6 +138,8 @@ class Sidebar extends React.Component {
                             </Link> 
                         </NavText>
                     </NavItem>
+                    :
+                    null
                     :
                     null
                     }

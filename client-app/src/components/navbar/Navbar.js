@@ -41,7 +41,7 @@ class Navbar extends React.Component {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                 </ul>
-                {this.props.current_user.email!==''?
+                {localStorage.getItem("user_id")?
                     <div className="m-auto">
                     <button 
                     disabled={this.props.loading}
@@ -87,7 +87,7 @@ class Navbar extends React.Component {
                     }
                     
                     {
-                    this.props.current_user.email!==''?
+                    localStorage.getItem("user_id")?
                     this.props.current_user.credit!==undefined?
                     <span style={{"fontSize":"15px","marginLeft":"10px"}} className="mr-4">
                         Credit : <strong>{parseFloat(this.props.current_user.credit.$numberDecimal).toFixed(2)}</strong> rsd
@@ -96,7 +96,7 @@ class Navbar extends React.Component {
                     null
                     :
                     null
-                }
+                    }
                     {
                     localStorage.getItem("user_id")?
                     <div onClick={this.handleLogout} className="btn btn-primary  my-2 my-lg-0 logoutBtn">

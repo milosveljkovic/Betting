@@ -54,10 +54,10 @@ export const thunk_action_loginWithEmailAndPass = credentials => {
     }
   }
 
-  export function updateUsersTickets (my_tickets) {
+  export function updateUsersTickets (updated_user) {
     return {
         type:UPDATE_USER_TICKETS,
-        my_tickets
+        updated_user
     }
   }
 
